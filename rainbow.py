@@ -6,10 +6,10 @@ from splash import *
 t0 = time.clock()
 t = 0
 
-def gradient(x,y):
-	dr = (y - (0.5 + math.sin(t*2)))**2
-	dg = (y - (0.5 + math.sin(t*3.1)))**2
-	db = (y - (0.5 + math.sin(t*1.5)))**2
+def gradient(x,y,img):
+	dr = (x - (0.5 + math.sin(t*4)*.7))**2
+	dg = (x - (0.5 + math.sin(t*6.2)*.7))**2
+	db = (x - (0.5 + math.sin(t*3.1)*.7))**2
 	return IColor(1-dr*8, 1-dg*8, 1-db*8)
 
 # Main program logic follows:

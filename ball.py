@@ -6,7 +6,7 @@ from splash import *
 t0 = time.clock()
 t = 0
 
-def gradient(x,y):
+def gradient(x,y,img):
 	dx = x - (0.5 + math.sin(t*4)*0.4)
 	dy = y - (0.5 + math.cos(t*5.2)*0.4)
 	dist = math.sqrt(dx**2 + dy**2)

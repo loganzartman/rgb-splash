@@ -6,7 +6,7 @@ from splash import *
 t0 = time.clock()
 t = 0
 
-def gradient(x,y):
+def gradient(x,y,img):
 	#compute center
 	cx = .5
 	cy = .5

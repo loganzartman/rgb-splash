@@ -8,7 +8,7 @@ t = 0
 
 ball = dict(x=0.5, y=0.5, vx=0.03, vy=0.021)
 
-def gradient(x,y):
+def gradient(x,y,img):
 	dx = x - ball["x"]
 	dy = y - ball["y"]
 	dist = math.sqrt(dx**2 + dy**2)

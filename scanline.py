@@ -6,8 +6,8 @@ from splash import *
 t0 = time.clock()
 t = 0
 
-def gradient(x,y):
-	v = y-1+(t*0.5)%2
+def gradient(x,y,img):
+	v = y-1+(t)%2
 	return IColor(v,v,v)
 
 # Main program logic follows:
