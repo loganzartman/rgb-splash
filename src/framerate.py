@@ -9,7 +9,7 @@ idx = 0
 if __name__ == '__main__':
 	strip = createStrip()
 	
-	t0 = time.clock()
+	t0 = time.time()
 	
 	while True:
 		clear(strip)
@@ -18,8 +18,8 @@ if __name__ == '__main__':
 
 		idx += 1
 		if idx >= LED_COUNT:
-			print("FPS: "+str(LED_COUNT/float(time.clock()-t0)))
-			t0 = time.clock()
+			print("FPS: "+str(LED_COUNT/(time.time()-t0)))
+			t0 = time.time()
 			idx = 0
 
-		time.sleep(32./1000)
+		time.sleep(0./1000)

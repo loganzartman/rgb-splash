@@ -6,9 +6,9 @@ import sys
 import time
 import random
 from splash.matrix import *
+from splash.timer import *
 
-t = 0
-t0 = time.clock()
+timer = FrameTimer()
 
 INTENSITY = 1.0
 if len(sys.argv) > 1:
@@ -16,6 +16,7 @@ if len(sys.argv) > 1:
 BRIGHTNESS = INTENSITY
 
 def render(x,y,img):
+	t = timer.time
 	cx = 0.5
 	cx += math.sin(t*4+y)*.5*(1-y*.6)
 	cx += math.sin(t*7+y*2)*.5*(1-y*.6)
@@ -37,9 +38,9 @@ if __name__ == '__main__':
 	img = Image(LED_W, LED_H)
 
 	while True:		
+		timer.startFrame()
+
 		img.compute(render)
 		showImage(strip, img)
 		
-		t += time.clock() - t0
-		t0 = time.clock()
-		time.sleep(10./1000)
+		timer.endFrame()

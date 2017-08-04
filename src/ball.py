@@ -4,11 +4,12 @@ import time
 import math
 from random import randint
 from splash.matrix import *
+from splash.timer import *
 
-t0 = time.clock()
-t = 0
+timer = FrameTimer(fps=60)
 
 def gradient(x,y,img):
+	t = timer.time
 	dx = x - (0.5 + math.sin(t*4)*0.4)
 	dy = y - (0.5 + math.cos(t*5.2)*0.4)
 	dist = math.sqrt(dx**2 + dy**2)
@@ -21,13 +22,10 @@ if __name__ == '__main__':
 	img = Image(LED_W, LED_H)
 
 	while True:
-		#update time
-		t = t + (time.clock() - t0)
-		t0 = time.clock()
+		timer.startFrame()
 
 		#compute pixels
 		showImage(strip, img)
 		img.compute(gradient)
 
-		#wait
-		time.sleep(8./1000)
+		timer.endFrame()

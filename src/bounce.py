@@ -4,9 +4,9 @@ import time
 import math
 import random
 from splash.matrix import *
+from splash.timer import *
 
-t0 = time.clock()
-t = 0
+timer = FrameTimer(fps=60)
 
 ball = dict(x=0.5, y=0.5, vx=0.03, vy=0.021)
 
@@ -23,9 +23,7 @@ if __name__ == '__main__':
 	img = Image(LED_W, LED_H)
 
 	while True:
-		#update time
-		t = t + (time.clock() - t0)
-		t0 = time.clock()
+		timer.startFrame()
 
 		ball["x"] += ball["vx"]
 		ball["y"] += ball["vy"]
@@ -38,5 +36,4 @@ if __name__ == '__main__':
 		img.compute(gradient)
 		showImage(strip, img)
 
-		#wait
-		time.sleep(16./1000)
+		timer.endFrame()
