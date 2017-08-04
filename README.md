@@ -10,6 +10,7 @@
 
 ### Model and printing <a name="model"/>
 1. An idea
+![Prototype and Print](http://i.imgur.com/c5eZpfi.jpg)
 2. Prototype
 3. Printing
   * Setbacks
@@ -19,11 +20,13 @@
 1. Parts list
 2. Overview
 3. Cutting and soldering
+![Soldering Animation](http://i.imgur.com/pSiaVeP.gif)
 
 ### Software <a name="software"/>
 1. rpi_ws281x
+![LED Test](http://i.imgur.com/ACd9LKz.jpg)
 2. neopixel.py
 3. splash.py and img.py
 4. Example code
 
-![Animation](https://thumbs.gfycat.com/DistortedDopeyEyelashpitviper-size_restricted.gif)
+![Demo Animation](https://thumbs.gfycat.com/DistortedDopeyEyelashpitviper-size_restricted.gif)
