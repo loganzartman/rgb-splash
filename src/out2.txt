@@ -1,0 +1,497 @@
+         476260 function calls (475394 primitive calls) in 22.259 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     7951    4.420    0.001   14.567    0.002 torchlight2.py:38(render)
+    39376    4.118    0.000    6.811    0.000 torchlight2.py:30(render)
+      189    3.050    0.016    3.050    0.016 {time.sleep}
+    86746    2.483    0.000    2.483    0.000 img.py:46(__init__)
+    39376    2.029    0.000    3.127    0.000 img.py:74(__add__)
+   118161    1.146    0.000    1.146    0.000 {max}
+    23814    0.967    0.000    1.142    0.000 img.py:60(scaleClip)
+     7938    0.500    0.000    1.642    0.000 img.py:67(pack)
+      190    0.429    0.002   15.015    0.079 img.py:19(compute)
+    39459    0.373    0.000    0.373    0.000 {math.sqrt}
+     7938    0.306    0.000    2.577    0.000 splash.py:24(setPixel)
+     7938    0.238    0.000    0.629    0.000 neopixel.py:124(setPixelColor)
+      189    0.229    0.001    3.011    0.016 splash.py:30(showImage)
+     7938    0.180    0.000    0.391    0.000 neopixel.py:36(__setitem__)
+    23814    0.175    0.000    0.175    0.000 {round}
+     9338    0.123    0.000    0.123    0.000 {isinstance}
+     7938    0.104    0.000    0.104    0.000 {_rpi_ws281x.ws2811_led_set}
+      189    0.102    0.001    0.102    0.001 {_rpi_ws281x.ws2811_render}
+     7938    0.081    0.000    0.081    0.000 img.py:11(getPixel)
+   157/47    0.080    0.001    0.215    0.005 sre_parse.py:388(_parse)
+        1    0.060    0.060   22.261   22.261 torchlight2.py:1(<module>)
+   292/42    0.058    0.000    0.124    0.003 sre_compile.py:64(_compile)
+     1659    0.043    0.000    0.051    0.000 sre_parse.py:191(__next)
+     2946    0.039    0.000    0.039    0.000 {range}
+        1    0.037    0.037    0.038    0.038 hashlib.py:56(<module>)
+        5    0.033    0.007    0.059    0.012 collections.py:288(namedtuple)
+        2    0.031    0.015    0.054    0.027 zipfile.py:803(_RealGetContents)
+        1    0.030    0.030    0.920    0.920 pkg_resources.py:15(<module>)
+  415/165    0.027    0.000    0.033    0.000 sre_parse.py:149(getwidth)
+     1208    0.024    0.000    0.039    0.000 sre_parse.py:139(__getitem__)
+      941    0.024    0.000    0.024    0.000 torchlight2.py:21(update)
+       28    0.023    0.001    0.070    0.002 pkg_resources.py:1884(find_on_path)
+     1385    0.019    0.000    0.061    0.000 sre_parse.py:210(get)
+        1    0.019    0.019    0.021    0.021 socket.py:45(<module>)
+        3    0.019    0.006    0.019    0.006 {method 'get_data' of 'zipimport.zipimporter' objects}
+        1    0.019    0.019    0.206    0.206 utils.py:5(<module>)
+5860/5709    0.019    0.000    0.020    0.000 {len}
+        1    0.018    0.018    0.975    0.975 _rpi_ws281x.py:1(__bootstrap__)
+      111    0.016    0.000    0.025    0.000 sre_compile.py:256(_optimize_charset)
+     4464    0.016    0.000    0.016    0.000 {method 'append' of 'list' objects}
+      941    0.015    0.000    0.015    0.000 torchlight2.py:27(inBounds)
+        1    0.015    0.015    0.017    0.017 zipfile.py:433(_GenerateCRCTable)
+        1    0.015    0.015    0.110    0.110 urllib.py:23(<module>)
+        1    0.014    0.014    0.014    0.014 <string>:1(manifest_mod)
+      164    0.012    0.000    0.035    0.000 torchlight2.py:14(__init__)
+      485    0.012    0.000    0.015    0.000 urlparse.py:332(<genexpr>)
+      485    0.012    0.000    0.014    0.000 urllib.py:1212(<genexpr>)
+   136/42    0.012    0.000    0.219    0.005 sre_parse.py:310(_parse_sub)
+     2423    0.011    0.000    0.011    0.000 {method 'endswith' of 'str' objects}
+       71    0.011    0.000    0.424    0.006 re.py:230(_compile)
+      164    0.010    0.000    0.015    0.000 random.py:562(gauss)
+       16    0.009    0.001    0.009    0.001 {posix.listdir}
+      841    0.008    0.000    0.015    0.000 sre_parse.py:204(match)
+        1    0.008    0.008    0.017    0.017 shutil.py:5(<module>)
+        1    0.008    0.008    0.008    0.008 {function seed at 0xb6a5c930}
+     1370    0.007    0.000    0.007    0.000 {chr}
+       42    0.007    0.000    0.049    0.001 sre_compile.py:433(_compile_info)
+      146    0.007    0.000    0.010    0.000 zipfile.py:287(__init__)
+       23    0.007    0.000    0.008    0.000 pkg_resources.py:2807(_get_mro)
+      328    0.007    0.000    0.008    0.000 random.py:358(uniform)
+      111    0.007    0.000    0.033    0.000 sre_compile.py:228(_compile_charset)
+        1    0.007    0.007    0.068    0.068 zipfile.py:3(<module>)
+        5    0.007    0.001    0.011    0.002 pkg_resources.py:1736(_index)
+      238    0.006    0.000    0.006    0.000 {method 'remove' of 'list' objects}
+        1    0.006    0.006    0.045    0.045 urlparse.py:29(<module>)
+        1    0.006    0.006    0.053    0.053 random.py:40(<module>)
+        1    0.006    0.006    0.009    0.009 collections.py:1(<module>)
+      572    0.006    0.000    0.008    0.000 sre_parse.py:135(__len__)
+      123    0.006    0.000    0.010    0.000 sre_compile.py:428(_simple)
+      617    0.006    0.000    0.006    0.000 {min}
+        1    0.005    0.005    0.015    0.015 io.py:34(<module>)
+      189    0.005    0.000    0.108    0.001 neopixel.py:117(show)
+      494    0.005    0.000    0.007    0.000 sre_parse.py:147(append)
+        1    0.005    0.005    0.033    0.033 ssl.py:88(<module>)
+       42    0.005    0.000    0.410    0.010 sre_compile.py:567(compile)
+      584    0.005    0.000    0.005    0.000 {method 'read' of 'cStringIO.StringI' objects}
+     1258    0.005    0.000    0.005    0.000 {method 'lower' of 'str' objects}
+       72    0.005    0.000    0.009    0.000 sre_parse.py:234(_class_escape)
+       52    0.004    0.000    0.004    0.000 {posix.stat}
+       42    0.004    0.000    0.228    0.005 sre_parse.py:686(parse)
+        1    0.004    0.004    0.261    0.261 feedparser.py:20(<module>)
+        1    0.004    0.004    0.985    0.985 splash.py:1(<module>)
+        1    0.004    0.004    0.230    0.230 message.py:5(<module>)
+      662    0.004    0.000    0.004    0.000 {method 'startswith' of 'str' objects}
+      148    0.004    0.000    0.008    0.000 pkg_resources.py:1553(<genexpr>)
+      242    0.004    0.000    0.004    0.000 {method 'format' of 'str' objects}
+        1    0.003    0.003    0.008    0.008 _parseaddr.py:7(<module>)
+        1    0.003    0.003    0.004    0.004 calendar.py:6(<module>)
+      292    0.003    0.000    0.003    0.000 sre_parse.py:90(__init__)
+      273    0.003    0.000    0.003    0.000 {method 'find' of 'bytearray' objects}
+       23    0.003    0.000    0.011    0.000 pkg_resources.py:2814(_find_adapter)
+       25    0.003    0.000    0.005    0.000 posixpath.py:336(normpath)
+        1    0.003    0.003    0.040    0.040 plistlib.py:51(<module>)
+        1    0.003    0.003    0.004    0.004 __init__.py:5(<module>)
+        1    0.003    0.003    0.979    0.979 neopixel.py:3(<module>)
+        1    0.003    0.003    0.004    0.004 base64.py:3(<module>)
+       84    0.003    0.000    0.003    0.000 sre_compile.py:546(isstring)
+      101    0.003    0.000    0.004    0.000 sre_parse.py:266(_escape)
+        1    0.003    0.003    0.003    0.003 heapq.py:31(<module>)
+        2    0.003    0.001    0.025    0.013 pkg_resources.py:1711(_is_current)
+        1    0.003    0.003    0.218    0.218 charset.py:6(<module>)
+        1    0.003    0.003    0.003    0.003 {imp.load_dynamic}
+        4    0.003    0.001    0.006    0.001 ssl.py:111(_import_symbols)
+       16    0.003    0.000    0.016    0.001 pkg_resources.py:2290(from_location)
+        1    0.003    0.003    0.003    0.003 errors.py:5(<module>)
+       13    0.003    0.000    0.003    0.000 sre_compile.py:411(_mk_bitmap)
+       40    0.003    0.000    0.003    0.000 {posix.lstat}
+       72    0.003    0.000    0.004    0.000 posixpath.py:68(join)
+       43    0.003    0.000    0.421    0.010 re.py:192(compile)
+      146    0.003    0.000    0.003    0.000 zipfile.py:383(_decodeExtra)
+       16    0.002    0.000    0.006    0.000 pkg_resources.py:553(add)
+        8    0.002    0.000    0.002    0.000 {method 'read' of 'file' objects}
+        1    0.002    0.002    0.264    0.264 parser.py:5(<module>)
+       10    0.002    0.000    0.010    0.001 posixpath.py:387(_joinrealpath)
+      202    0.002    0.000    0.002    0.000 {method 'split' of 'str' objects}
+      267    0.002    0.000    0.003    0.000 collections.py:332(<genexpr>)
+       22    0.002    0.000    0.175    0.008 pkg_resources.py:477(add_entry)
+      150    0.002    0.000    0.002    0.000 {_struct.unpack}
+        8    0.002    0.000    0.005    0.001 pkg_resources.py:2490(insert_on)
+       15    0.002    0.000    0.073    0.005 pkg_resources.py:1570(load)
+       42    0.002    0.000    0.174    0.004 sre_compile.py:552(_code)
+      455    0.002    0.000    0.002    0.000 {method 'get' of 'dict' objects}
+        9    0.002    0.000    0.002    0.000 {built-in method __new__ of type object at 0x2d4c48}
+       48    0.002    0.000    0.003    0.000 pkg_resources.py:2346(key)
+       16    0.002    0.000    0.011    0.001 pkg_resources.py:2278(__init__)
+        8    0.002    0.000    0.004    0.001 abc.py:148(__subclasscheck__)
+      146    0.002    0.000    0.002    0.000 zipfile.py:904(getinfo)
+      200    0.002    0.000    0.004    0.000 {method 'join' of 'str' objects}
+      173    0.002    0.000    0.002    0.000 {method 'replace' of 'str' objects}
+        1    0.002    0.002    0.002    0.002 {_rpi_ws281x.ws2811_init}
+        1    0.002    0.002    0.002    0.002 {zip}
+       28    0.002    0.000    0.002    0.000 {method 'sub' of '_sre.SRE_Pattern' objects}
+        1    0.002    0.002    0.207    0.207 base64mime.py:25(<module>)
+      492    0.002    0.000    0.002    0.000 {method 'random' of '_random.Random' objects}
+        2    0.002    0.001    0.066    0.033 pkg_resources.py:1542(build)
+        5    0.002    0.000    0.005    0.001 abc.py:86(__new__)
+      162    0.002    0.000    0.002    0.000 {getattr}
+       79    0.002    0.000    0.002    0.000 sre_parse.py:72(opengroup)
+        6    0.002    0.000    0.002    0.000 {dir}
+      146    0.001    0.000    0.001    0.000 zipfile.py:377(_decodeFilename)
+       84    0.001    0.000    0.001    0.000 {math.log}
+        1    0.001    0.001    0.002    0.002 img.py:1(<module>)
+       42    0.001    0.000    0.001    0.000 {_sre.compile}
+       40    0.001    0.000    0.005    0.000 posixpath.py:139(islink)
+      100    0.001    0.000    0.014    0.000 pkg_resources.py:2050(_normalize_cached)
+        1    0.001    0.001    0.001    0.001 plistlib.py:393(PlistParser)
+       30    0.001    0.000    0.005    0.000 genericpath.py:38(isdir)
+      148    0.001    0.000    0.001    0.000 {method 'find' of 'str' objects}
+       28    0.001    0.000    0.004    0.000 {all}
+       17    0.001    0.000    0.002    0.000 sre_parse.py:225(isname)
+        1    0.001    0.001    0.001    0.001 message.py:92(Message)
+      123    0.001    0.000    0.001    0.000 sre_parse.py:143(__setitem__)
+      366    0.001    0.000    0.001    0.000 {ord}
+       79    0.001    0.000    0.002    0.000 sre_parse.py:83(closegroup)
+       82    0.001    0.000    0.001    0.000 {math.cos}
+       42    0.001    0.000    0.003    0.000 sre_parse.py:187(__init__)
+        1    0.001    0.001    0.001    0.001 tempfile.py:18(<module>)
+        1    0.001    0.001    0.001    0.001 contextlib.py:1(<module>)
+       28    0.001    0.000    0.008    0.000 re.py:148(sub)
+        8    0.001    0.000    0.019    0.002 pkg_resources.py:2414(activate)
+        1    0.001    0.001    0.183    0.183 platform.py:10(<module>)
+       17    0.001    0.000    0.001    0.000 {method 'match' of '_sre.SRE_Pattern' objects}
+       22    0.001    0.000    0.001    0.000 _weakrefset.py:36(__init__)
+        2    0.001    0.000    0.001    0.001 zipfile.py:872(namelist)
+       22    0.001    0.000    0.013    0.001 pkg_resources.py:1852(find_distributions)
+       16    0.001    0.000    0.001    0.000 {posix.access}
+        1    0.001    0.001    0.002    0.002 img.py:5(__init__)
+       24    0.001    0.000    0.001    0.000 pkg_resources.py:2450(__getattr__)
+        1    0.001    0.001    0.001    0.001 symbol.py:3(<module>)
+       82    0.001    0.000    0.001    0.000 {math.sin}
+       22    0.001    0.000    0.001    0.000 pkgutil.py:366(get_importer)
+        2    0.001    0.000    0.029    0.015 pkg_resources.py:1659(_extract_resource)
+        1    0.001    0.001    0.001    0.001 socket.py:179(_socketobject)
+       42    0.001    0.000    0.001    0.000 sre_parse.py:67(__init__)
+       19    0.001    0.000    0.001    0.000 _weakrefset.py:58(__iter__)
+       61    0.001    0.000    0.001    0.000 {_sre.getlower}
+       16    0.001    0.000    0.001    0.000 genericpath.py:85(_splitext)
+        1    0.001    0.001    0.001    0.001 neopixel.py:53(__init__)
+        8    0.001    0.000    0.082    0.010 pkg_resources.py:1753(_has)
+        6    0.001    0.000    0.046    0.008 {map}
+        1    0.001    0.001    0.008    0.008 quoprimime.py:27(<module>)
+        4    0.001    0.000    0.001    0.000 {open}
+      239    0.001    0.000    0.001    0.000 {method 'isalnum' of 'str' objects}
+       12    0.001    0.000    0.002    0.000 pkg_resources.py:1462(_fn)
+       52    0.001    0.000    0.001    0.000 {method 'items' of 'dict' objects}
+        1    0.001    0.001    0.001    0.001 ssl.py:125(<dictcomp>)
+        1    0.001    0.001    0.001    0.001 token.py:1(<module>)
+        1    0.001    0.001    0.001    0.001 uu.py:31(<module>)
+        8    0.001    0.000    0.001    0.000 {method 'seek' of 'file' objects}
+       52    0.001    0.000    0.001    0.000 {method 'rfind' of 'str' objects}
+       39    0.001    0.000    0.001    0.000 stat.py:55(S_ISLNK)
+        8    0.001    0.000    0.005    0.001 abc.py:105(register)
+        1    0.001    0.001    0.001    0.001 os.py:35(_get_exports_list)
+        8    0.001    0.000    0.012    0.002 pkg_resources.py:2409(_get_metadata)
+        9    0.001    0.000    0.001    0.000 posixpath.py:127(dirname)
+        2    0.000    0.000    0.001    0.001 zipfile.py:201(_EndRecData)
+       71    0.000    0.000    0.000    0.000 stat.py:24(S_IFMT)
+       28    0.000    0.000    0.001    0.000 collections.py:358(<genexpr>)
+       30    0.000    0.000    0.001    0.000 stat.py:40(S_ISDIR)
+        8    0.000    0.000    0.083    0.010 pkg_resources.py:1858(find_eggs_in_zip)
+        5    0.000    0.000    0.001    0.000 pkg_resources.py:1484(_setup_prefix)
+       15    0.000    0.000    0.074    0.005 pkg_resources.py:1633(zipinfo)
+       16    0.000    0.000    0.001    0.000 posixpath.py:104(splitext)
+       43    0.000    0.000    0.000    0.000 {setattr}
+        1    0.000    0.000    0.001    0.001 <string>:1(<module>)
+        5    0.000    0.000    0.001    0.000 abc.py:89(<genexpr>)
+        8    0.000    0.000    0.001    0.000 pkg_resources.py:2010(fixup_namespace_packages)
+       16    0.000    0.000    0.007    0.000 pkg_resources.py:1154(safe_name)
+       10    0.000    0.000    0.013    0.001 pkg_resources.py:2046(normalize_path)
+       28    0.000    0.000    0.001    0.000 collections.py:356(<genexpr>)
+       12    0.000    0.000    0.002    0.000 pkg_resources.py:1162(safe_version)
+       82    0.000    0.000    0.000    0.000 sre_parse.py:219(isident)
+        8    0.000    0.000    0.000    0.000 {method 'index' of 'list' objects}
+        9    0.000    0.000    0.084    0.009 pkg_resources.py:1398(has_metadata)
+        1    0.000    0.000    0.009    0.009 random.py:100(seed)
+    27/16    0.000    0.000    0.005    0.000 {issubclass}
+       16    0.000    0.000    0.000    0.000 _weakrefset.py:83(add)
+        2    0.000    0.000    0.055    0.028 zipfile.py:726(__init__)
+        4    0.000    0.000    0.012    0.003 pkg_resources.py:2456(from_filename)
+       54    0.000    0.000    0.000    0.000 {method 'setdefault' of 'dict' objects}
+       10    0.000    0.000    0.003    0.000 posixpath.py:365(abspath)
+        4    0.000    0.000    0.000    0.000 {time.mktime}
+        2    0.000    0.000    0.002    0.001 pkg_resources.py:1002(get_cache_path)
+        5    0.000    0.000    0.000    0.000 {repr}
+       10    0.000    0.000    0.013    0.001 posixpath.py:379(realpath)
+       15    0.000    0.000    0.000    0.000 {hasattr}
+        8    0.000    0.000    0.000    0.000 _weakrefset.py:26(__exit__)
+        1    0.000    0.000    0.000    0.000 {posix.urandom}
+        1    0.000    0.000    0.130    0.130 pkg_resources.py:422(__init__)
+       10    0.000    0.000    0.000    0.000 pkg_resources.py:1614(_zipinfo_name)
+        1    0.000    0.000    0.001    0.001 pkg_resources.py:2865(_initialize)
+        1    0.000    0.000    0.000    0.000 calendar.py:47(_localized_month)
+       16    0.000    0.000    0.000    0.000 {method 'group' of '_sre.SRE_Match' objects}
+       20    0.000    0.000    0.001    0.000 posixpath.py:59(isabs)
+        1    0.000    0.000    0.000    0.000 {_rpi_ws281x.new_ws2811_t}
+        1    0.000    0.000    0.000    0.000 __future__.py:48(<module>)
+        2    0.000    0.000    0.000    0.000 {method 'close' of 'file' objects}
+        2    0.000    0.000    0.001    0.000 pkg_resources.py:1110(get_default_cache)
+        6    0.000    0.000    0.000    0.000 hashlib.py:100(__get_openssl_constructor)
+        1    0.000    0.000    0.000    0.000 zipfile.py:709(ZipFile)
+       40    0.000    0.000    0.000    0.000 {method 'partition' of 'str' objects}
+       21    0.000    0.000    0.000    0.000 {method 'extend' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:2274(Distribution)
+        1    0.000    0.000    0.020    0.020 pkg_resources.py:752(subscribe)
+       19    0.000    0.000    0.000    0.000 __init__.py:75(__init__)
+        9    0.000    0.000    0.000    0.000 pkg_resources.py:536(__iter__)
+        4    0.000    0.000    0.000    0.000 pkg_resources.py:96(_declare_state)
+        2    0.000    0.000    0.000    0.000 posixpath.py:258(expanduser)
+        1    0.000    0.000    0.000    0.000 sysconfig.py:584(get_platform)
+        4    0.000    0.000    0.001    0.000 pkg_resources.py:1829(__init__)
+        1    0.000    0.000    0.000    0.000 <string>:1(DefaultVerifyPaths)
+        9    0.000    0.000    0.000    0.000 posixpath.py:119(basename)
+        1    0.000    0.000    0.000    0.000 <string>:1(ParseResult)
+        1    0.000    0.000    0.000    0.000 ssl.py:479(SSLSocket)
+        1    0.000    0.000    0.000    0.000 <string>:1(SplitResult)
+        2    0.000    0.000    0.000    0.000 {_ssl.txt2obj}
+        8    0.000    0.000    0.000    0.000 _weakrefset.py:20(__enter__)
+       47    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+        8    0.000    0.000    0.019    0.002 pkg_resources.py:2884(<lambda>)
+        1    0.000    0.000    0.000    0.000 tempfile.py:505(SpooledTemporaryFile)
+        1    0.000    0.000    0.130    0.130 pkg_resources.py:435(_build_master)
+        1    0.000    0.000    0.000    0.000 <string>:1(_ASN1Object)
+        1    0.000    0.000    0.000    0.000 {math.exp}
+        1    0.000    0.000    0.000    0.000 iterators.py:5(<module>)
+        1    0.000    0.000    0.034    0.034 pkg_resources.py:1637(get_resource_filename)
+        1    0.000    0.000    0.000    0.000 collections.py:26(OrderedDict)
+        1    0.000    0.000    0.001    0.001 pkg_resources.py:256(get_build_platform)
+        3    0.000    0.000    0.000    0.000 pkg_resources.py:1623(_parts)
+        4    0.000    0.000    0.000    0.000 pkg_resources.py:1650(_get_date_and_size)
+        1    0.000    0.000    0.000    0.000 calendar.py:66(_localized_day)
+        2    0.000    0.000    0.000    0.000 ssl.py:302(__new__)
+        1    0.000    0.000    0.001    0.001 pkg_resources.py:778(Environment)
+        1    0.000    0.000    0.000    0.000 encoders.py:5(<module>)
+       65    0.000    0.000    0.000    0.000 {globals}
+       16    0.000    0.000    0.000    0.000 pkg_resources.py:2810(cls)
+        2    0.000    0.000    0.055    0.028 pkg_resources.py:1595(__new__)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1189(MarkerEvaluation)
+        1    0.000    0.000    0.000    0.000 quopri.py:3(<module>)
+       16    0.000    0.000    0.000    0.000 pkgutil.py:173(__init__)
+        1    0.000    0.000    0.000    0.000 random.py:72(Random)
+        2    0.000    0.000    0.000    0.000 stat.py:49(S_ISREG)
+        9    0.000    0.000    0.000    0.000 _weakrefset.py:70(__contains__)
+        8    0.000    0.000    0.000    0.000 {imp.acquire_lock}
+        1    0.000    0.000    0.000    0.000 functools.py:17(update_wrapper)
+        2    0.000    0.000    0.000    0.000 zipfile.py:158(_EndRecData64)
+        4    0.000    0.000    0.000    0.000 zipfile.py:1261(close)
+        1    0.000    0.000    0.000    0.000 {binascii.hexlify}
+        1    0.000    0.000    0.000    0.000 atexit.py:6(<module>)
+       13    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+        9    0.000    0.000    0.000    0.000 {method 'update' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1604(ZipProvider)
+       28    0.000    0.000    0.000    0.000 {method '__contains__' of 'frozenset' objects}
+       13    0.000    0.000    0.000    0.000 {method 'translate' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 socket.py:235(_fileobject)
+        1    0.000    0.000    0.004    0.004 pkg_resources.py:1727(_get_eager_resources)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1375(NullProvider)
+        8    0.000    0.000    0.000    0.000 _weakrefset.py:16(__init__)
+        4    0.000    0.000    0.000    0.000 UserDict.py:18(__getitem__)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:2159(EntryPoint)
+        1    0.000    0.000    0.011    0.011 pkg_resources.py:2573(DistInfoDistribution)
+        2    0.000    0.000    0.000    0.000 pkg_resources.py:2065(yield_lines)
+        2    0.000    0.000    0.001    0.000 pkg_resources.py:84(_bypass_ensure_directory)
+        2    0.000    0.000    0.000    0.000 posixpath.py:89(split)
+        8    0.000    0.000    0.000    0.000 pkg_resources.py:760(_added_new)
+        1    0.000    0.000    0.000    0.000 urllib.py:120(URLopener)
+        1    0.000    0.000    0.000    0.000 keyword.py:11(<module>)
+       28    0.000    0.000    0.000    0.000 {method 'isdigit' of 'str' objects}
+        5    0.000    0.000    0.000    0.000 {_struct.calcsize}
+        1    0.000    0.000    0.001    0.001 pkg_resources.py:226(get_provider)
+        2    0.000    0.000    0.000    0.000 pkg_resources.py:1027(_warn_unsafe_extraction_path)
+       10    0.000    0.000    0.000    0.000 pkg_resources.py:1784(__init__)
+        1    0.000    0.000    0.000    0.000 feedparser.py:158(FeedParser)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:419(WorkingSet)
+        1    0.000    0.000    0.011    0.011 zipfile.py:501(ZipExtFile)
+        1    0.000    0.000    0.000    0.000 fnmatch.py:11(<module>)
+        2    0.000    0.000    0.000    0.000 genericpath.py:26(isfile)
+        1    0.000    0.000    0.000    0.000 urlparse.py:73(ResultMixin)
+        1    0.000    0.000    0.035    0.035 pkg_resources.py:951(resource_filename)
+        1    0.000    0.000    0.000    0.000 calendar.py:126(Calendar)
+        1    0.000    0.000    0.003    0.003 splash.py:17(createStrip)
+       10    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+        5    0.000    0.000    0.000    0.000 {sys._getframe}
+        8    0.000    0.000    0.000    0.000 _weakrefset.py:52(_commit_removals)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:934(ResourceManager)
+        1    0.000    0.000    0.000    0.000 contextlib.py:54(contextmanager)
+        1    0.000    0.000    0.000    0.000 genericpath.py:15(exists)
+        1    0.000    0.000    0.000    0.000 urllib.py:616(FancyURLopener)
+        1    0.000    0.000    0.000    0.000 collections.py:390(Counter)
+        1    0.000    0.000    0.021    0.021 pkg_resources.py:1564(MemoizedZipManifests)
+        1    0.000    0.000    0.000    0.000 plistlib.py:230(PlistWriter)
+        1    0.000    0.000    0.000    0.000 tempfile.py:108(_RandomNameSequence)
+        1    0.000    0.000    0.000    0.000 neopixel.py:52(Adafruit_NeoPixel)
+        2    0.000    0.000    0.000    0.000 {cStringIO.StringIO}
+        1    0.000    0.000    0.000    0.000 copy_reg.py:14(pickle)
+        1    0.000    0.000    0.001    0.001 pkg_resources.py:1467(_get)
+        1    0.000    0.000    0.000    0.000 charset.py:156(Charset)
+        1    0.000    0.000    0.001    0.001 pkg_resources.py:129(get_supported_platform)
+        1    0.000    0.000    0.017    0.017 zipfile.py:420(_ZipDecrypter)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1501(_has)
+        1    0.000    0.000    0.002    0.002 neopixel.py:108(begin)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1610(__init__)
+        2    0.000    0.000    0.000    0.000 zipfile.py:800(__exit__)
+        1    0.000    0.000    0.000    0.000 img.py:45(IColor)
+        1    0.000    0.000    0.000    0.000 colorsys.py:17(<module>)
+        1    0.000    0.000    0.000    0.000 feedparser.py:43(BufferedSubFile)
+        1    0.000    0.000    0.000    0.000 {posix.uname}
+        1    0.000    0.000    0.000    0.000 _parseaddr.py:172(AddrlistClass)
+        1    0.000    0.000    0.000    0.000 img.py:4(Image)
+        1    0.000    0.000    0.000    0.000 calendar.py:259(TextCalendar)
+        1    0.000    0.000    0.000    0.000 calendar.py:376(HTMLCalendar)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1382(__init__)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1480(__init__)
+        2    0.000    0.000    0.000    0.000 {method 'setter' of 'property' objects}
+        1    0.000    0.000    0.000    0.000 platform.py:388(_popen)
+        1    0.000    0.000    0.000    0.000 ssl.py:326(SSLContext)
+        4    0.000    0.000    0.000    0.000 {built-in method fromkeys}
+        1    0.000    0.000    0.000    0.000 tempfile.py:372(_TemporaryFileWrapper)
+        1    0.000    0.000    0.001    0.001 pkg_resources.py:1402(get_metadata)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1498(DefaultProvider)
+        2    0.000    0.000    0.000    0.000 <string>:8(__new__)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:2722(Requirement)
+        1    0.000    0.000    0.000    0.000 urllib.py:860(ftpwrapper)
+        1    0.000    0.000    0.000    0.000 plistlib.py:365(Data)
+        3    0.000    0.000    0.000    0.000 pkg_resources.py:217(register_loader_type)
+        7    0.000    0.000    0.000    0.000 __future__.py:75(__init__)
+        1    0.000    0.000    0.000    0.000 ssl.py:297(_ASN1Object)
+        1    0.000    0.000    0.000    0.000 io.py:69(IOBase)
+        1    0.000    0.000    0.976    0.976 _rpi_ws281x.py:1(<module>)
+        1    0.000    0.000    0.000    0.000 random.py:655(WichmannHill)
+        2    0.000    0.000    0.000    0.000 {method 'tell' of 'file' objects}
+        1    0.000    0.000    0.001    0.001 pkg_resources.py:1412(get_metadata_lines)
+        1    0.000    0.000    0.009    0.009 random.py:91(__init__)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1763(_eager_to_zip)
+        1    0.000    0.000    0.000    0.000 {method 'union' of 'set' objects}
+       10    0.000    0.000    0.000    0.000 posixpath.py:51(normcase)
+        1    0.000    0.000    0.000    0.000 calendar.py:132(__init__)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1766(_resource_to_zip)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:391(IResourceProvider)
+        8    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
+        2    0.000    0.000    0.000    0.000 zipfile.py:1257(__del__)
+        1    0.000    0.000    0.000    0.000 zipfile.py:262(ZipInfo)
+        8    0.000    0.000    0.000    0.000 {method '__subclasshook__' of 'object' objects}
+        8    0.000    0.000    0.000    0.000 {imp.release_lock}
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:367(IMetadataProvider)
+        3    0.000    0.000    0.000    0.000 UserDict.py:70(__contains__)
+        1    0.000    0.000    0.000    0.000 plistlib.py:151(DumbXMLWriter)
+        1    0.000    0.000    0.000    0.000 _parseaddr.py:452(AddressList)
+        1    0.000    0.000    0.000    0.000 {method 'sort' of 'list' objects}
+        8    0.000    0.000    0.000    0.000 {method '__subclasses__' of 'type' objects}
+        1    0.000    0.000    0.000    0.000 plistlib.py:331(Plist)
+        1    0.000    0.000    0.000    0.000 functools.py:39(wraps)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1523(EmptyProvider)
+        1    0.000    0.000    0.000    0.000 {posix.getcwd}
+        1    0.000    0.000    0.000    0.000 io.py:76(BufferedIOBase)
+        1    0.000    0.000    0.000    0.000 random.py:805(SystemRandom)
+        1    0.000    0.000    0.000    0.000 parser.py:17(Parser)
+        3    0.000    0.000    0.000    0.000 {_rpi_ws281x.ws2811_channel_get}
+        5    0.000    0.000    0.000    0.000 pkg_resources.py:1787(has_metadata)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:101(fixup)
+        3    0.000    0.000    0.000    0.000 pkg_resources.py:1842(register_finder)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1772(FileMetadata)
+        1    0.000    0.000    0.000    0.000 urllib.py:1009(addinfourl)
+        3    0.000    0.000    0.000    0.000 {_rpi_ws281x.ws2811_channel_t_gpionum_set}
+        2    0.000    0.000    0.000    0.000 pkg_resources.py:1821(__init__)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1537(ZipManifests)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1584(ContextualZipFile)
+        1    0.000    0.000    0.000    0.000 socket.py:167(_closedsocket)
+        1    0.000    0.000    0.000    0.000 calendar.py:536(LocaleHTMLCalendar)
+        3    0.000    0.000    0.000    0.000 pkg_resources.py:1934(register_namespace_handler)
+        1    0.000    0.000    0.000    0.000 neopixel.py:20(__init__)
+        1    0.000    0.000    0.000    0.000 calendar.py:488(TimeEncoding)
+        1    0.000    0.000    0.000    0.000 calendar.py:501(LocaleTextCalendar)
+        1    0.000    0.000    0.000    0.000 torchlight2.py:13(Particle)
+        1    0.000    0.000    0.000    0.000 atexit.py:37(register)
+        1    0.000    0.000    0.000    0.000 neopixel.py:16(_LED_Data)
+        3    0.000    0.000    0.000    0.000 {_rpi_ws281x.ws2811_channel_t_brightness_set}
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_md5}
+        1    0.000    0.000    0.000    0.000 zipfile.py:1373(PyZipFile)
+        1    0.000    0.000    0.000    0.000 parser.py:86(HeaderParser)
+        3    0.000    0.000    0.000    0.000 {_rpi_ws281x.ws2811_channel_t_count_set}
+        1    0.000    0.000    0.000    0.000 contextlib.py:9(GeneratorContextManager)
+        1    0.000    0.000    0.000    0.000 __future__.py:74(_Feature)
+        1    0.000    0.000    0.000    0.000 io.py:79(TextIOBase)
+        3    0.000    0.000    0.000    0.000 {_rpi_ws281x.ws2811_channel_t_invert_set}
+        1    0.000    0.000    0.000    0.000 __init__.py:74(LazyImporter)
+        2    0.000    0.000    0.000    0.000 calendar.py:71(__init__)
+        1    0.000    0.000    0.000    0.000 calendar.py:21(IllegalMonthError)
+        1    0.000    0.000    0.000    0.000 io.py:73(RawIOBase)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1477(EggProvider)
+        1    0.000    0.000    0.000    0.000 calendar.py:28(IllegalWeekdayError)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:195(ResolutionError)
+        1    0.000    0.000    0.000    0.000 errors.py:35(MessageDefect)
+        1    0.000    0.000    0.000    0.000 contextlib.py:132(closing)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha512}
+        1    0.000    0.000    0.000    0.000 urllib.py:955(addbase)
+        1    0.000    0.000    0.000    0.000 plistlib.py:291(_InternalDict)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha256}
+        1    0.000    0.000    0.000    0.000 urllib.py:984(addclosehook)
+        1    0.000    0.000    0.000    0.000 urllib.py:999(addinfo)
+        1    0.000    0.000    0.000    0.000 {method 'splitlines' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 copy_reg.py:27(constructor)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha384}
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha1}
+        1    0.000    0.000    0.000    0.000 urlparse.py:129(ParseResult)
+        1    0.000    0.000    0.000    0.000 urllib.py:114(ContentTooShortError)
+        1    0.000    0.000    0.000    0.000 plistlib.py:322(Dict)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1801(PathMetadata)
+        1    0.000    0.000    0.000    0.000 {method 'insert' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 urlparse.py:121(SplitResult)
+        1    0.000    0.000    0.000    0.000 calendar.py:138(setfirstweekday)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha224}
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:938(__init__)
+        2    0.000    0.000    0.000    0.000 calendar.py:52(__init__)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1826(EggMetadata)
+        1    0.000    0.000    0.000    0.000 shutil.py:31(Error)
+        1    0.000    0.000    0.000    0.000 ssl.py:318(Purpose)
+        1    0.000    0.000    0.000    0.000 ssl.py:181(CertificateError)
+        2    0.000    0.000    0.000    0.000 zipfile.py:797(__enter__)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:203(DistributionNotFound)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:918(ExtractionError)
+        1    0.000    0.000    0.000    0.000 errors.py:56(MultipartInvariantViolationDefect)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:200(VersionConflict)
+        1    0.000    0.000    0.000    0.000 zipfile.py:24(LargeZipFile)
+        1    0.000    0.000    0.000    0.000 shutil.py:34(SpecialFileError)
+        1    0.000    0.000    0.000    0.000 errors.py:13(MessageParseError)
+        1    0.000    0.000    0.000    0.000 errors.py:25(MultipartConversionError)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:206(UnknownExtra)
+        1    0.000    0.000    0.000    0.000 shutil.py:38(ExecError)
+        1    0.000    0.000    0.000    0.000 errors.py:17(HeaderParseError)
+        1    0.000    0.000    0.000    0.000 zipfile.py:20(BadZipfile)
+        1    0.000    0.000    0.000    0.000 errors.py:29(CharsetError)
+        1    0.000    0.000    0.000    0.000 errors.py:9(MessageError)
+        1    0.000    0.000    0.000    0.000 errors.py:21(BoundaryError)
+        1    0.000    0.000    0.000    0.000 __init__.py:1(<module>)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:214(tell)
+        1    0.000    0.000    0.000    0.000 uu.py:39(Error)
+        1    0.000    0.000    0.000    0.000 errors.py:50(MisplacedEnvelopeHeaderDefect)
+        1    0.000    0.000    0.000    0.000 errors.py:44(StartBoundaryNotFoundDefect)
+        1    0.000    0.000    0.000    0.000 errors.py:53(MalformedHeaderDefect)
+        1    0.000    0.000    0.000    0.000 errors.py:41(NoBoundaryInMultipartDefect)
+        1    0.000    0.000    0.000    0.000 {_rpi_ws281x.ws2811_channel_t_strip_type_set}
+        1    0.000    0.000    0.000    0.000 errors.py:47(FirstHeaderLineIsContinuationDefect)
+        1    0.000    0.000    0.000    0.000 pkg_resources.py:1531(__init__)
+        2    0.000    0.000    0.000    0.000 pkg_resources.py:1880(find_nothing)
+        1    0.000    0.000    0.000    0.000 {thread.allocate_lock}
+        1    0.000    0.000    0.000    0.000 {_rpi_ws281x.ws2811_t_freq_set}
+        1    0.000    0.000    0.000    0.000 {_rpi_ws281x.ws2811_t_dmanum_set}
+        1    0.000    0.000    0.000    0.000 {method 'toordinal' of 'datetime.date' objects}
+        1    0.000    0.000    0.000    0.000 {method 'strip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+

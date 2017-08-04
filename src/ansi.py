@@ -8,8 +8,8 @@ CODE_CURSOR_FWD = 'C'
 CODE_CURSOR_BWD = 'D'
 CODE_CURSOR_POS = 'H'
 
-CODE_CURSOR_HIDE = 'l'
-CODE_CURSOR_SHOW = 'h'
+CODE_CURSOR_HIDE = '?25l'
+CODE_CURSOR_SHOW = '?25h'
 
 CODE_CURSOR_LOAD = 'u'
 CODE_CURSOR_SAVE = 's'
@@ -40,6 +40,12 @@ def cursorSave():
 
 def cursorLoad():
     return output(csi(CODE_CURSOR_LOAD))
+
+def cursorHide():
+	return output(csi(CODE_CURSOR_HIDE))
+
+def cursorShow():
+	return output(csi(CODE_CURSOR_SHOW))
 
 def cursorTo(row=1,col=1):
     return output(csi(CODE_CURSOR_POS, "{0};{1}".format(row,col)))

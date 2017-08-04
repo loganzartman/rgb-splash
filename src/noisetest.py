@@ -1,6 +1,3 @@
-
-# -*- coding: utf-8 -*-
-
 from noise import *
 import math
 import time
@@ -9,14 +6,11 @@ import sys
 import ansi
 import colorsys
 
-def clear():
-	os.system("cls" if os.name == "nt" else "clear")
-
-WIDTH = 40
-HEIGHT = 15
-SCALE = 0.05
-SPEED = 2
-CHR = "█"
+WIDTH = 32
+HEIGHT = 16
+SCALE = 0.08
+SPEED = 3
+CHR = " "
 colors = [ansi.COLOR_RED, ansi.COLOR_YELLOW, ansi.COLOR_GREEN, ansi.COLOR_CYAN, ansi.COLOR_BLUE, ansi.COLOR_BLACK]
 
 noise = Noise()
@@ -25,8 +19,8 @@ def render(t=0):
 	for y in range(0,HEIGHT):
 		for x in range(0,WIDTH):
 			val = noise.perlin(1+x*SCALE+t, 1+y*SCALE, 1+t) * 0.5 + 0.5
-			rgb = colorsys.hls_to_rgb(val,0.5,1.0)
-			ansi.setColorRGB(rgb[0]*255, rgb[1]*255, rgb[2]*255)
+			rgb = colorsys.hls_to_rgb(val*2.,0.5,1.0)
+			ansi.setColorRGB(255-rgb[0]*255, rgb[1]*255, rgb[2]*255, ansi.COLOR_BG)
 			sys.stdout.write(CHR)
 		sys.stdout.write("\n")
 	sys.stdout.flush()
@@ -34,6 +28,8 @@ def render(t=0):
 def rrt():
 	t = 0
 	t0 = time.clock()
+
+	ansi.cursorHide()
 	
 	while True:
 		t1 = time.clock()
@@ -50,4 +46,5 @@ except KeyboardInterrupt:
 	ansi.resetFormat()
 	ansi.cursorTo()
 	ansi.clear()
+	ansi.cursorShow()
 	pass
