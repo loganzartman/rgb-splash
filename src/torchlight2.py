@@ -1,7 +1,7 @@
 import sys
 import time
 import random
-from splash import *
+from splash.matrix import *
 
 INTENSITY = 0.5
 if len(sys.argv) > 1:

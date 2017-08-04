@@ -1,5 +1,5 @@
 import time
-from splash import *
+from splash.matrix import *
 
 idx = 0
 

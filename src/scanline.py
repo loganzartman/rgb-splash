@@ -1,7 +1,7 @@
 import time
 import math
 from random import randint
-from splash import *
+from splash.matrix import *
 
 t0 = time.clock()
 t = 0

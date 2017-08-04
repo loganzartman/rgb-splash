@@ -3,8 +3,8 @@ import sys
 import time
 import random
 import colorsys
-from splash import *
-from noise import *
+from splash.matrix import *
+from splash.noise import *
 
 t = 0
 noise = Noise()
