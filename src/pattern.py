@@ -1,3 +1,8 @@
+"""Immediately display a single grayscale or RGB color using a pattern of
+LEDs at full brightness.
+Produce a similar effect to clearl.py, but without using PWM brightness.
+"""
+
 import sys
 from splash.matrix import *
 

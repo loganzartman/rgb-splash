@@ -1,3 +1,5 @@
+"""Continuously display a moving metaball."""
+
 import time
 import math
 from random import randint

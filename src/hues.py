@@ -1,3 +1,5 @@
+"""Immediately display all hues."""
+
 import sys
 from splash.matrix import *
 

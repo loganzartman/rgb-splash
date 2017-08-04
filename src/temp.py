@@ -1,3 +1,7 @@
+"""Immediately display a color temperature.
+Provide a single argument: color temperature in Kelvin.
+"""
+
 import sys
 from splash.matrix import *
 

@@ -1,3 +1,7 @@
+"""Continuously display a torchlight effect.
+Provide a single argument: intensity multiplier.
+"""
+
 import time
 import math
 import random

@@ -1,3 +1,13 @@
+"""Immediately clear the matrix to black, a grayscale value, or an RGB color.
+Use the linear color scaling formula. See clear.py.
+
+If a single argument is passed:
+It is interpreted as a grayscale float in the range [0,1]
+
+If three arguments are passed:
+They are intepreted as red, green, and blue floats in the range [0,1]
+"""
+
 import sys
 from splash.matrix import *
 

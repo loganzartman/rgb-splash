@@ -1,3 +1,5 @@
+"""Continuously display a bouncing ball."""
+
 import time
 import math
 import random

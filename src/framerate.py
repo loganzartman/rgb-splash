@@ -1,3 +1,5 @@
+"""Test the framerate achievable by the matrix."""
+
 import time
 from splash.matrix import *
 

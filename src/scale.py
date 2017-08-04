@@ -1,3 +1,5 @@
+"""Display a scale of brightnesses using the non-linear scaling formula."""
+
 import time
 import math
 from random import randint

@@ -1,3 +1,5 @@
+"""Continuously display a rainbow plasma effect."""
+
 from __future__ import print_function
 import sys
 import time
