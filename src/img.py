@@ -50,14 +50,26 @@ class IColor:
 	def scaleClip(x):
 		x = 0 if x < 0 else x
 		x = 1 if x > 1 else x
-		# return int(round(x*255.))
 		return int(round((x*.3+(x**3)*.7)*255))
+
+	@staticmethod
+	def scaleClipl(x):
+		x = 0 if x < 0 else x
+		x = 1 if x > 1 else x
+		return int(round(x*255.))
 
 	def pack(self):
 		a = 255
 		r = IColor.scaleClip(self.r)
 		g = IColor.scaleClip(self.g)
 		b = IColor.scaleClip(self.b)
+		return (a << 24) | (r << 16) | (g << 8) | (b)
+
+	def packl(self):
+		a = 255
+		r = IColor.scaleClipl(self.r)
+		g = IColor.scaleClipl(self.g)
+		b = IColor.scaleClipl(self.b)
 		return (a << 24) | (r << 16) | (g << 8) | (b)
 
 	def __add__(self, other):
