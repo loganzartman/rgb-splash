@@ -141,9 +141,9 @@ class Image:
 
 	def setPixel(self, px, py, color):
 		"""Given a position (in pixel units), set the color of that pixel."""
-		if not self.inBounds(x,y):
+		if not self.inBounds(px,py):
 			return
-		idx = y*self.w + x
+		idx = py*self.w + px
 		self.data[idx] = color
 
 	def sample(self, x, y):
