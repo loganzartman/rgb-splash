@@ -3,13 +3,14 @@ import asyncio
 import async_timeout
 import json
 
+URL = "http://localhost:8080"
+
 def logCallback(s):
-	print("Received: " + s)
+	print("Received: " + str(s))
 
 async def fetch(session, url):
-	with async_timeout.timeout(10):
-		async with session.get(url) as response:
-			return await response.text()
+	async with session.get(url) as response:
+		return await response.text()
 
 async def fetchJSON(session, url):
 	text = await fetch(session, url)
@@ -17,14 +18,24 @@ async def fetchJSON(session, url):
 
 class Subscription:
 	def __init__(self, session, path="/", callback=None):
+		self.session = session
 		self.path = path
 		self.callback = callback
 
+	async def subscribe(self):
+		data = await fetchJSON(self.session, URL + self.path)
+		if data["ok"]:
+			if self.callback != None:
+				self.callback(data)
+		await self.subscribe()
+
 async def main():
 	async with aiohttp.ClientSession() as session:
-		print("Waiting...")
-		data = await fetchJSON(session, "http://localhost:8080/test")
-		print(data)
+		subs = []
+		subs.append(Subscription(session, path="/test", callback=logCallback))
+		subs.append(Subscription(session, path="/test", callback=logCallback))
+
+		await asyncio.wait([sub.subscribe() for sub in subs])
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())

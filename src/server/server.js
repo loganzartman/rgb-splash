@@ -7,10 +7,13 @@ app.get("/hello", (req,res) => {
 	res.send("Hello world!");
 });
 
+let testCounter = 0;
 app.get("/test", (req,res) => {
+	let counter = testCounter++;
 	setTimeout(()=>{
 		res.end(JSON.stringify({
-			"ok": true
+			"ok": true,
+			"c": counter
 		}));
 	}, 1000);
 });
