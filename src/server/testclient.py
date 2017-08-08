@@ -4,6 +4,7 @@ import async_timeout
 import json
 
 URL = "http://localhost:8080"
+CID = "test"
 
 def logCallback(s):
 	print("Received: " + str(s))
@@ -33,8 +34,9 @@ async def main():
 	async with aiohttp.ClientSession() as session:
 		subs = []
 		subs.append(Subscription(session, path="/test", callback=logCallback))
-		subs.append(Subscription(session, path="/power", callback=logCallback))
+		subs.append(Subscription(session, path="/client/"+CID+"/state/power", callback=logCallback))
 
+		await fetchJSON(session, URL+"/client/"+CID+"/connect")
 		await asyncio.wait([sub.subscribe() for sub in subs])
 
 loop = asyncio.get_event_loop()

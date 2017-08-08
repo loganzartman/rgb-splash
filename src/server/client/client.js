@@ -28,9 +28,9 @@ class Client {
 Client.init();
 
 document.getElementById("powerOn").addEventListener("click", function(event){
-	Client.httpReq("/power", "POST", {"state": "on"}, result => console.log(result));
+	Client.httpReq("/client/test/state/power/true", "POST", {}, result => console.log(result));
 }, false);
 
 document.getElementById("powerOff").addEventListener("click", function(event){
-	Client.httpReq("/power", "POST", {"state": "off"}, result => console.log(result));
+	Client.httpReq("/client/test/state/power/false", "POST", {}, result => console.log(result));
 }, false);
