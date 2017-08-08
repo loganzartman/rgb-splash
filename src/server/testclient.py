@@ -1,43 +1,30 @@
-import aiohttp
-import asyncio
-import async_timeout
-import json
+from splash.matrix import *
+from client import *
 
-URL = "http://localhost:8080"
+URL = "http://192.168.1.136:8080"
 CID = "test"
 
-def logCallback(s):
-	print("Received: " + str(s))
+class TestClient:
+	def __init__(self):
+		self.strip = createStrip()
+		self.power = False
+		self.bright = IColor(1,.5,.1)
+		self.dark = IColor()
 
-async def fetch(session, url):
-	async with session.get(url) as response:
-		return await response.text()
+	def powerCallback(self, data):
+		self.power = data["power"]
+		self.updateMatrix()
 
-async def fetchJSON(session, url):
-	text = await fetch(session, url)
-	return json.loads(text)
+	def colorCallback(self, data):
+		self.bright = IColor(data["color"][0], data["color"][1], data["color"][2])
+		self.updateMatrix()
 
-class Subscription:
-	def __init__(self, session, path="/", callback=None):
-		self.session = session
-		self.path = path
-		self.callback = callback
+	def updateMatrix(self):
+		clear(self.strip, self.bright if self.power else self.dark)
 
-	async def subscribe(self):
-		data = await fetchJSON(self.session, URL + self.path)
-		if data["ok"]:
-			if self.callback != None:
-				self.callback(data)
-		await self.subscribe()
-
-async def main():
-	async with aiohttp.ClientSession() as session:
-		subs = []
-		subs.append(Subscription(session, path="/test", callback=logCallback))
-		subs.append(Subscription(session, path="/client/"+CID+"/state/power", callback=logCallback))
-
-		await fetchJSON(session, URL+"/client/"+CID+"/connect")
-		await asyncio.wait([sub.subscribe() for sub in subs])
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
+tc = TestClient()
+subs = []
+subs.append(Subscription(path="/test", callback=logCallback))
+subs.append(Subscription(path="/client/"+CID+"/state/power", callback=tc.powerCallback))
+subs.append(Subscription(path="/client/"+CID+"/state/color", callback=tc.colorCallback))
+startClient(subs, URL, CID)

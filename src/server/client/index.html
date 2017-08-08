@@ -2,10 +2,39 @@
 <html>
 <head>
 	<title>Test Client</title>
+	<script src="vue.min.js"></script>
 	<script src="client.js" defer></script>
+	<style type="text/css">
+		.swatch {
+			display: inline-block;
+			width: 3.5em;
+			height: 2em;
+			line-height: 2em;
+			text-align: center;
+			color: white;
+			text-shadow: 0px 0px 2px black;
+		}
+	</style>
 </head>
 <body>
-	<button id="powerOn">ON</button>
-	<button id="powerOff">OFF</button>
+<div id="container">
+	<button v-on:click="power(true)">ON</button>
+	<button v-on:click="power(false)">OFF</button><br>
+	<table>
+		<tr>
+			<td><label class="swatch" v-bind:style="makeColor('red')" for="red-slider">r</label></td>
+			<td><input id="red-slider" v-model="red" type="range" min="0" max="1" step="0.01"/></td>
+		</tr>
+		<tr>
+			<td><label class="swatch" v-bind:style="makeColor('green')" for="green-slider">g</label></td>
+			<td><input id="green-slider" v-model="green" type="range" min="0" max="1" step="0.01"/></td>
+		</tr>
+		<tr>
+			<td><label class="swatch" v-bind:style="makeColor('blue')" for="blue-slider">b</label></td>
+			<td><input id="blue-slider" v-model="blue" type="range" min="0" max="1" step="0.01"/></td>
+		</tr>
+	</table>
+	<div v-bind:style="mixedColor" style="width: 5em" class="swatch"></div>
+</div>
 </body>
 </html>
