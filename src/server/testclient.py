@@ -33,7 +33,7 @@ async def main():
 	async with aiohttp.ClientSession() as session:
 		subs = []
 		subs.append(Subscription(session, path="/test", callback=logCallback))
-		subs.append(Subscription(session, path="/test", callback=logCallback))
+		subs.append(Subscription(session, path="/power", callback=logCallback))
 
 		await asyncio.wait([sub.subscribe() for sub in subs])
 
