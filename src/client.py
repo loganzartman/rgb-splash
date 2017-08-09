@@ -49,7 +49,7 @@ def main(subs):
 
 	for sub in subs:
 		sub.session = session
-		print("Subscribing...")
+		print("Subscribing to " + sub.path + "...")
 		asyncio.async(sub.subscribe())
 
 def startClient(subs, url, cid):

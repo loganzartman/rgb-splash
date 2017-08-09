@@ -45,3 +45,6 @@ def clear(strip, color=IColor(0,0,0)):
 	for i in range(LED_COUNT):
 		strip.setPixelColor(i, color)
 	strip.show()
+
+def clip(f,lo,hi):
+	return max(lo, min(hi, f))

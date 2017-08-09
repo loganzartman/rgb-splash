@@ -1,6 +1,7 @@
 from splash.matrix import *
 from client import *
 import json
+import animations
 
 URL = "http://192.168.1.136:8080"
 CID = "test"
@@ -18,13 +19,37 @@ class TestClient:
 
 	def copyUpdateCallback(self, data):
 		self.copyCallback(data)
-		print(self.data)
 		self.updateMatrix()
 
+	def powerCallback(self, data):
+		previousPower = self.getPower()
+		self.copyCallback(data)
+		color = self.getColor()
+		black = IColor()
+		fromColor = color if previousPower else black
+		toColor = color if self.getPower() else black
+		if not self.getPower():
+			animations.colorWipeReverse(self.strip, fromColor, toColor, 0.5, 2)
+		else:
+			animations.colorWipe(self.strip, fromColor, toColor, 0.5, 2)
+
+	def colorCallback(self, data):
+		previousColor = self.getColor()
+		self.copyCallback(data)
+		color = self.getColor()
+		if self.getPower():
+			animations.colorFade(self.strip, previousColor, color, 0.1)
+
 	def updateMatrix(self):
-		bright = IColor(self.data["color"][0], self.data["color"][1], self.data["color"][2])
+		bright = self.getColor()
 		dark = IColor()
-		clear(self.strip, bright if self.data["power"] else dark)
+		clear(self.strip, bright if self.getPower() else dark)
+
+	def getColor(self):
+		return IColor(self.data["color"][0], self.data["color"][1], self.data["color"][2])
+
+	def getPower(self):
+		return self.data["power"]
 
 def logWrap(callback):
 	def f(data):
@@ -35,7 +60,7 @@ def logWrap(callback):
 tc = TestClient()
 subs = []
 # subs.append(Subscription(path="/test", callback=logCallback))
-subs.append(Subscription(path="/client/"+CID+"/state/power", callback=tc.copyUpdateCallback))
-subs.append(Subscription(path="/client/"+CID+"/state/color", callback=tc.copyUpdateCallback))
+subs.append(Subscription(path="/client/"+CID+"/state/power", callback=tc.powerCallback))
+subs.append(Subscription(path="/client/"+CID+"/state/color", callback=tc.colorCallback))
 print("Starting client...")
 startClient(subs, URL, CID)

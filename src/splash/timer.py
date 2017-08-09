@@ -18,3 +18,6 @@ class FrameTimer:
 		dt = time.time() - self.frameStart
 		self.realFps = 1/dt
 		time.sleep(max(MIN_SLEEP, 1/self.fps - dt))
+
+	def reset(self):
+		self.t0 = time.time()
