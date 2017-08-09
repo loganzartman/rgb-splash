@@ -2,6 +2,7 @@ import aiohttp
 import asyncio
 import async_timeout
 import json
+import signal
 
 URL = None
 CID = None
@@ -31,20 +32,40 @@ class Subscription:
 		if data["ok"]:
 			if self.callback != None:
 				self.callback(data)
-		yield from self.subscribe()
+		asyncio.async(self.subscribe())
+
+def doConnect():
+	loop = asyncio.get_event_loop()
+
+	@asyncio.coroutine
+	def connect():
+		session = aiohttp.ClientSession()
+		yield from fetchJSON(session, URL+"/client/"+CID+"/connect")
+	loop.run_until_complete(connect())
 
 @asyncio.coroutine
 def main(subs):
 	session = aiohttp.ClientSession()
+
 	for sub in subs:
 		sub.session = session
-	yield from fetchJSON(session, URL+"/client/"+CID+"/connect")
-	yield from asyncio.wait([sub.subscribe() for sub in subs])
+		print("Subscribing...")
+		asyncio.async(sub.subscribe())
 
 def startClient(subs, url, cid):
 	global URL
 	global CID
 	URL = url
-	CID = cid	
-	loop = asyncio.get_event_loop()
-	loop.run_until_complete(main(subs))
+	CID = cid
+
+	try:
+		doConnect()
+		loop = asyncio.get_event_loop()
+		loop.run_until_complete(main(subs))
+		loop.run_forever()
+	except KeyboardInterrupt:
+		pass
+	except asyncio.CancelledError:
+		print("Task cancelled.")
+	finally:
+		loop.close()

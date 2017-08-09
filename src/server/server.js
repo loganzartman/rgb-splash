@@ -5,6 +5,9 @@ const fs = require("fs");
 
 let app = express();
 
+const DEBUG = true;
+function log(s) {if (DEBUG) console.log(s);}
+
 const defaults = JSON.parse(fs.readFileSync("defaults.json"));
 let clientStates = {};
 let clientCallbacks = {};
@@ -27,6 +30,7 @@ app.get("/client/:cid/connect", (req,res) => {
 		"ok": true,
 		"cid": cid
 	}));
+	console.log(`Client ${cid} connected.`);
 });
 
 app.get("/client/:cid/disconnect", (req,res) => {
@@ -36,6 +40,7 @@ app.get("/client/:cid/disconnect", (req,res) => {
 		"ok": true,
 		"cid": cid
 	}));
+	console.log(`Client ${cid} disconnected.`);
 });
 
 app.get("/client/:cid/state/:name", (req,res) => {
@@ -45,7 +50,7 @@ app.get("/client/:cid/state/:name", (req,res) => {
 	//make sure client is online
 	if (!(cid in clientCallbacks)) {
 		res.end(JSON.stringify({"ok": false}));
-		console.log(`Client ${cid} is offline.`);
+		log(`Client ${cid} is offline.`);
 		return;
 	}
 
@@ -71,10 +76,12 @@ app.post("/client/:cid/state/:name/:value", (req,res) => {
 	let cid = req.params.cid;
 	let value = JSON.parse(req.params.value);
 
+	log(`POST ${name}=${value}`);
+
 	//make sure client is online
 	if (!(cid in clientCallbacks)) {
 		res.end(JSON.stringify({"ok": false}));
-		console.log(`Client ${cid} is offline.`);
+		log(`Client ${cid} is offline.`);
 		return;
 	}
 
@@ -88,5 +95,7 @@ app.post("/client/:cid/state/:name/:value", (req,res) => {
 
 app.use(express.static("client"));
 app.listen(PORT, ()=>{
-	console.log(`rgb-splash server running at :${PORT}`);
+	require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+		console.log(`rgb-splash server running at ${add}:${PORT}`);
+	})
 });

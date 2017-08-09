@@ -1,14 +1,10 @@
 class Client {
 	static init() {
-		Client.outputNode = document.createElement("div");
-		document.body.appendChild(Client.outputNode);
 		Client.log("Test client loaded!");
 	}
 
 	static log(s) {
-		if (Client.outputNode.childNodes.length > 0)
-			Client.outputNode.appendChild(document.createElement("br"));
-		Client.outputNode.appendChild(document.createTextNode(s));
+		console.log(s);
 	}
 
 	static httpReq(path, mode, callback, params={}) {
@@ -54,27 +50,29 @@ function debounce(f, timeout) {
 let vm = new Vue({
 	el: "#container",
 	data: {
-		red: 0,
-		green: 0,
-		blue: 0
+		channels: [
+			{name: "red", val: 0},
+			{name: "green", val: 0},
+			{name: "blue", val: 0}
+		]
 	},
 	computed: {
 		mixedColor: function() {
 			return {"backgroundColor": `rgb(\
-				${Math.floor(this.red*255)},\
-				${Math.floor(this.green*255)},\
-				${Math.floor(this.blue*255)}\
+				${Math.floor(this.channels[0].val*255)},\
+				${Math.floor(this.channels[1].val*255)},\
+				${Math.floor(this.channels[2].val*255)}\
 			)`};
 		}
 	},
 	methods: {
-		makeColor: function(channelName) {
-			color = {red: 0, green: 0, blue: 0};
-			color[channelName] = this[channelName];
+		makeColor: function(channelIdx) {
+			color = [0,0,0];
+			color[channelIdx] = this.channels[channelIdx].val;
 			return {"backgroundColor": `rgb(\
-				${Math.floor(color.red*255)},\
-				${Math.floor(color.green*255)},\
-				${Math.floor(color.blue*255)}\
+				${Math.floor(color[0]*255)},\
+				${Math.floor(color[1]*255)},\
+				${Math.floor(color[2]*255)}\
 			)`};
 		},
 		power: function(state) {
@@ -90,15 +88,13 @@ let vm = new Vue({
 let colorChange = debounce((oldVal, newVal) => {
 	Client.httpReq(
 		"/client/test/state/color/" + JSON.stringify([
-			parseFloat(vm.red),
-			parseFloat(vm.green),
-			parseFloat(vm.blue)
+			parseFloat(vm.channels[0].val),
+			parseFloat(vm.channels[1].val),
+			parseFloat(vm.channels[2].val)
 		]),
 		"POST",
 		result => console.log(result)
 	);
 }, 200);
 
-vm.$watch("red", colorChange);
-vm.$watch("green", colorChange);
-vm.$watch("blue", colorChange);
+vm.$watch("channels", colorChange, {deep: true});
