@@ -1,5 +1,5 @@
 from neopixel import *
-from img import *
+from splash.img import *
 
 # LED strip configuration:
 LED_W          = 7

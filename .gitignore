@@ -50,3 +50,5 @@ Temporary Items
 __pycache__
 
 s.py
+
+node_modules
