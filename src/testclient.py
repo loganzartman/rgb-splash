@@ -2,9 +2,13 @@ from splash.matrix import *
 from client import *
 import json
 import animations
+import sys
 
-URL = "http://192.168.1.136:8080"
+URL = "http://localhost:8080"
 CID = "test"
+
+if len(sys.argv) == 2:
+	URL = sys.argv[1]
 
 class TestClient:
 	def __init__(self):
