@@ -71,6 +71,22 @@ app.get("/client/:cid/state/:name", (req,res) => {
 	clientCallbacks[cid][name] = callback;
 });
 
+app.get("/client/:cid/fullstate", (req,res) => {
+	let cid = req.params.cid;
+
+	//make sure client is online
+	if (!(cid in clientCallbacks)) {
+		res.end(JSON.stringify({"ok": false}));
+		log(`Client ${cid} is offline.`);
+		return;
+	}
+
+	res.send(JSON.stringify(Object.assign(
+		{ok: true},
+		clientStates[cid]
+	)));
+});
+
 app.post("/client/:cid/state/:name/:value", (req,res) => {
 	let name = req.params.name;
 	let cid = req.params.cid;
@@ -84,6 +100,11 @@ app.post("/client/:cid/state/:name/:value", (req,res) => {
 		log(`Client ${cid} is offline.`);
 		return;
 	}
+
+	//update internal state
+	if (!(cid in clientStates))
+		clientStates[cid] = {};
+	clientStates[cid][name] = value;
 
 	const callback = clientCallbacks[cid][name];
 	callback(value);
