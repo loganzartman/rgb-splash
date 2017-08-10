@@ -1,0 +1,13 @@
+{
+	"short_name": "SCtrl",
+	"name": "Splash Controller",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "logo-144.png",
+			"type": "image/png",
+			"sizes": "144x144"
+		}
+	],
+	"start_url": "/?launcher=true"
+}
