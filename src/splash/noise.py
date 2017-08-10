@@ -3,10 +3,10 @@ import math
 
 class Noise:
 	def __init__(self, seed=None):
-		self.P = [x for x in range(1,256)]
-		self.P += self.P
+		self.P = [x for x in range(0,256)]
 		random.seed(seed)
 		random.shuffle(self.P)
+		self.P += self.P
 
 	def perlin(self,x,y,z):
 		# unit cube
