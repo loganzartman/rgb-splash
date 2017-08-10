@@ -50,25 +50,22 @@ function debounce(f, timeout) {
 let vm = new Vue({
 	el: "#container",
 	data: {
-		channels: [
-			{name: "red", val: 0},
-			{name: "green", val: 0},
-			{name: "blue", val: 0}
-		]
+		power: false,
+		color: [0,0,0]
 	},
 	computed: {
 		mixedColor: function() {
 			return {"backgroundColor": `rgb(\
-				${Math.floor(this.channels[0].val*255)},\
-				${Math.floor(this.channels[1].val*255)},\
-				${Math.floor(this.channels[2].val*255)}\
+				${Math.floor(this.color[0]*255)},\
+				${Math.floor(this.color[1]*255)},\
+				${Math.floor(this.color[2]*255)}\
 			)`};
 		}
 	},
 	methods: {
 		makeColor: function(channelIdx) {
 			color = [0,0,0];
-			color[channelIdx] = this.channels[channelIdx].val;
+			color[channelIdx] = this.color[channelIdx];
 			return {"backgroundColor": `rgb(\
 				${Math.floor(color[0]*255)},\
 				${Math.floor(color[1]*255)},\
@@ -88,9 +85,9 @@ let vm = new Vue({
 let colorChange = debounce((oldVal, newVal) => {
 	Client.httpReq(
 		"/client/test/state/color/" + JSON.stringify([
-			parseFloat(vm.channels[0].val),
-			parseFloat(vm.channels[1].val),
-			parseFloat(vm.channels[2].val)
+			parseFloat(vm.color[0]),
+			parseFloat(vm.color[1]),
+			parseFloat(vm.color[2])
 		]),
 		"POST",
 		result => console.log(result)
