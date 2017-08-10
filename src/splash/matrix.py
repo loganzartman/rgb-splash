@@ -46,5 +46,11 @@ def clear(strip, color=IColor(0,0,0)):
 		strip.setPixelColor(i, color)
 	strip.show()
 
+def rangeClip(f,fl,fh,tl,th):
+	f = clip(f, fl, fh)
+	f = (f - fl) / (fh - fl)
+	return f * (th - tl) + tl
+
 def clip(f,lo,hi):
 	return max(lo, min(hi, f))
+
