@@ -65,7 +65,9 @@ class TestClient:
 		if self.animation.active:
 			self.animation.update()
 		else:
+			self.animation.timer.startFrame()
 			self.updateMatrixColor()
+			self.animation.timer.endFrame()
 
 	def updateMatrixColor(self):
 		bright = self.getColor()
