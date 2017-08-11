@@ -26,6 +26,9 @@ class TestClient:
 		self.copyCallback(data)
 		self.updateMatrixColor()
 
+	def animationComplete(self, completed):
+		self.updateMatrixColor()
+
 	def powerCallback(self, data):
 		previousPower = self.getPower()
 		self.copyCallback(data)
@@ -39,7 +42,7 @@ class TestClient:
 			f = Animation.colorWipeReverse(fromColor, toColor)
 		else:
 			f = Animation.colorWipe(fromColor, toColor)
-		self.animation.startAnimation(f, 0.5, None)
+		self.animation.startAnimation(f, 0.5, self.animationComplete)
 
 	def colorCallback(self, data):
 		previousColor = self.getColor()
@@ -47,10 +50,9 @@ class TestClient:
 		color = self.getColor()
 		if self.getPower():
 			f = Animation.colorFade(previousColor, color)
-			self.animation.startAnimation(f, 0.1, None)
+			self.animation.startAnimation(f, 0.1, self.animationComplete)
 
 	def actionCallback(self, data):
-		print(data)
 		if data["action"] == "anim-strobe":
 			f = Animation.strobe(self.getColor(), 5)
 			self.animation.startContinuous(f)
@@ -66,7 +68,6 @@ class TestClient:
 			self.animation.update()
 		else:
 			self.animation.timer.startFrame()
-			self.updateMatrixColor()
 			self.animation.timer.endFrame()
 
 	def updateMatrixColor(self):
