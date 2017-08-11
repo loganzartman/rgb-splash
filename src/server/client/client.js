@@ -27,15 +27,6 @@ class Client {
 				power: false,
 				color: [0,0,0]
 			},
-			computed: {
-				mixedColor: function() {
-					return {"backgroundColor": `rgb(\
-						${Math.floor(this.color[0]*255)},\
-						${Math.floor(this.color[1]*255)},\
-						${Math.floor(this.color[2]*255)}\
-					)`};
-				}
-			},
 			methods: {
 				makeColor: function(channelIdx) {
 					let color = [0,0,0];

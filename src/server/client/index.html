@@ -28,13 +28,14 @@
 			</div>
 			<!-- Tabs -->
 			<div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-				<a href="#scroll-tab-1" class="mdl-layout__tab is-active">Basic</a>
-				<a href="#scroll-tab-2" class="mdl-layout__tab">About</a>
+				<a href="#scroll-basic" class="mdl-layout__tab is-active">Basic</a>
+				<a href="#scroll-effects" class="mdl-layout__tab">Effects</a>
+				<a href="#scroll-about" class="mdl-layout__tab">About</a>
 			</div>
 		</header>
 		<main class="mdl-layout__content">
 			<!-- Page: Basic control -->
-			<section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+			<section class="mdl-layout__tab-panel is-active" id="scroll-basic">
 				<div class="page-content">
 					<!-- Power buttons -->
 					<div class="mdl-grid">
@@ -44,15 +45,42 @@
 							 	<i class="material-icons">power_settings_new</i>&nbsp;{{power ? "Turn off" : "Turn on"}}
 							 </button>
 						</div>
+						
+						<!-- Main color picker -->
 					</div>
-
-					<!-- Main color picker -->
 					<rgb-sliders v-model="color"></rgb-sliders>
 				</div>
 			</section>
 
+			<!-- Page: Effects -->
+			<section class="mdl-layout__tab-panel" id="scroll-effects">
+				<div class="page-content">
+					<div class="mdl-grid">
+						<div class="mdl-cell mdl-cell--12-col">
+							<h4>It's lit</h4>
+							<p>Effects with <i class="material-icons" style="font-size: inherit;">colorize</i> may use the colors you select on the <b>Basic</b> tab.</p>
+						</div>
+						<div class="mdl-cell mdl-cell--4-col">
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%; height: 72px;">
+							<i class="material-icons">colorize</i> Strobe
+							</button>
+						</div>
+						<div class="mdl-cell mdl-cell--4-col">
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%; height: 72px;">
+							<i class="material-icons">colorize</i> Twinkle
+							</button>
+						</div>
+						<div class="mdl-cell mdl-cell--4-col">
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%; height: 72px;">
+							Rainbow
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<!-- Page: About -->
-			<section class="mdl-layout__tab-panel" id="scroll-tab-2">
+			<section class="mdl-layout__tab-panel" id="scroll-about">
 				<div class="page-content">
 					<div class="mdl-grid">
 						<div class="mdl-cell mdl-cell--12-col">

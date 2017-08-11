@@ -26,7 +26,7 @@ class Animation:
 			self.active = False
 			self._animFunc = None
 			if self.onComplete is not None:
-				self.onComplete()
+				self.onComplete(True)
 			return
 
 		self.img.compute(self._animFunc)
@@ -35,6 +35,10 @@ class Animation:
 
 	def startAnimation(self, func, duration=1, callback=None):
 		"""Begin an animation given a render function."""
+		if self.active:
+			if self.onComplete is not None:
+				self.onComplete(False)
+
 		self.timer.reset()
 		self.duration = duration
 		self.active = True
