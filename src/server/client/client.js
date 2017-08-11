@@ -46,13 +46,17 @@ class Client {
 						${Math.floor(color[2]*255)}\
 					)`};
 				},
-				togglePower: function() {
+				togglePower: function(event) {
+					let newPower = !vm.power;
+					let button = event.currentTarget;
+					button.disabled = true;
 					Client.httpReq(
-						`/client/${Client.vm.cid}/state/power/` + JSON.stringify(!vm.power),
+						`/client/${Client.vm.cid}/state/power/` + JSON.stringify(newPower),
 						"POST",
 						result => {
+							button.disabled = false;
 							if (JSON.parse(result).ok)
-								vm.power = !vm.power;
+								vm.power = newPower;
 						}
 					);
 				}

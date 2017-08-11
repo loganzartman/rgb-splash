@@ -1,7 +1,7 @@
 from splash.matrix import *
 from client import *
 import json
-import animations
+from animations import Animation
 import sys
 
 URL = "http://localhost:8080"
@@ -13,6 +13,7 @@ if len(sys.argv) == 2:
 class TestClient:
 	def __init__(self):
 		self.strip = createStrip()
+		self.animation = Animation(self.strip)
 		with open("defaults.json", "r") as file:
 			self.data = json.loads(file.read())
 
@@ -23,7 +24,7 @@ class TestClient:
 
 	def copyUpdateCallback(self, data):
 		self.copyCallback(data)
-		self.updateMatrix()
+		self.updateMatrixColor()
 
 	def powerCallback(self, data):
 		previousPower = self.getPower()
@@ -32,19 +33,29 @@ class TestClient:
 		black = IColor()
 		fromColor = color if previousPower else black
 		toColor = color if self.getPower() else black
+		
+		f = None
 		if not self.getPower():
-			animations.colorWipeReverse(self.strip, fromColor, toColor, 0.5, 2)
+			f = Animation.colorWipeReverse(fromColor, toColor)
 		else:
-			animations.colorWipe(self.strip, fromColor, toColor, 0.5, 2)
+			f = Animation.colorWipe(fromColor, toColor)
+		self.animation.startAnimation(f, 0.5, None)
 
 	def colorCallback(self, data):
 		previousColor = self.getColor()
 		self.copyCallback(data)
 		color = self.getColor()
 		if self.getPower():
-			animations.colorFade(self.strip, previousColor, color, 0.1)
+			f = Animation.colorFade(previousColor, color)
+			self.animation.startAnimation(f, 0.1, None)
 
-	def updateMatrix(self):
+	def update(self):
+		if self.animation.active:
+			self.animation.update()
+		else:
+			self.updateMatrixColor()
+
+	def updateMatrixColor(self):
 		bright = self.getColor()
 		dark = IColor()
 		clear(self.strip, bright if self.getPower() else dark)
@@ -67,4 +78,4 @@ subs = []
 subs.append(Subscription(path="/client/"+CID+"/state/power", callback=tc.powerCallback))
 subs.append(Subscription(path="/client/"+CID+"/state/color", callback=tc.colorCallback))
 print("Starting client...")
-startClient(subs, URL, CID)
+startClient(subs, URL, CID, tc.update)

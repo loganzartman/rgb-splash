@@ -22,6 +22,7 @@ Vue.component("rgb-sliders", {
 			</table>
 		</span>
 	</div>`,
+	props: ["value"],
 	data: function(){
 		return {
 			value: [0,0,0]

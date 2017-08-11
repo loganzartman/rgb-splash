@@ -57,12 +57,14 @@ app.get("/client/:cid/state/:name", (req,res) => {
 	if (clientCallbacks[cid][name])
 		clearTimeout(clientCallbacks[cid][name].timer)
 
-	callback = (state) => {
+	let callback = (state) => {
 		res.end(JSON.stringify({
 			"ok": true,
 			[name]: state
 		}));
+		callback.valid = false;
 	};
+	callback.valid = true;
 	callback.timer = setTimeout(()=>{
 		res.end(JSON.stringify({
 			"ok": false
@@ -101,17 +103,21 @@ app.post("/client/:cid/state/:name/:value", (req,res) => {
 		return;
 	}
 
-	//update internal state
-	if (!(cid in clientStates))
-		clientStates[cid] = {};
-	clientStates[cid][name] = value;
-
 	const callback = clientCallbacks[cid][name];
-	callback(value);
+	if (callback && callback.valid) {
+		//update internal state
+		if (!(cid in clientStates))
+			clientStates[cid] = {};
+		clientStates[cid][name] = value;
 
-	res.send(JSON.stringify({
-		"ok": true
-	}));
+		//call callback
+		callback(value);
+		
+		res.send(JSON.stringify({"ok": true}));
+	}
+	else {
+		res.send(JSON.stringify({"ok": false}));
+	}	
 });
 
 app.use(express.static("client"));
