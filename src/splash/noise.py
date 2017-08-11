@@ -2,11 +2,18 @@ import random
 import math
 
 class Noise:
-	def __init__(self, seed=None):
+	def __init__(self, seed=12345):
 		self.P = [x for x in range(0,256)]
+		self.seed = seed
 		random.seed(seed)
 		random.shuffle(self.P)
 		self.P += self.P
+
+	def int1d(self, n):
+		n = int(n + self.seed)
+		n = (n >> 13) ^ n
+		nn = (n * (n * n * 60493 + 19990303) + 1376312589) & 0x7fffffff
+		return 1.0 - (float(nn) / 1073741824.0)
 
 	def perlin(self,x,y,z):
 		# unit cube

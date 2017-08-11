@@ -54,13 +54,13 @@ class TestClient:
 
 	def actionCallback(self, data):
 		if data["action"] == "anim-strobe":
-			f = Animation.strobe(self.getColor(), 5)
+			f = Animation.strobe(self.getColor(), 1)
 			self.animation.startContinuous(f)
 		elif data["action"] == "anim-twinkle":
-			f = Animation.twinkle(self.getColor(), 2)
+			f = Animation.twinkle(self.getColor(), 1)
 			self.animation.startContinuous(f)
 		elif data["action"] == "anim-rainbow":
-			f = Animation.rainbow(3)
+			f = Animation.rainbow(1)
 			self.animation.startContinuous(f)
 
 	def update(self):

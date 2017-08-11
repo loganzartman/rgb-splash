@@ -1,5 +1,6 @@
 from splash.matrix import *
 from splash.timer import *
+from splash.noise import Noise
 
 class Animation:
 	def __init__(self, strip):
@@ -50,6 +51,7 @@ class Animation:
 		self.onComplete = callback
 
 	def startContinuous(self, func):
+		"""Begin a continuous animation (no duration) given a render function."""
 		self.startAnimation(func)
 		self.duration = None
 		self.continuous = True
@@ -79,24 +81,25 @@ class Animation:
 
 	@staticmethod
 	def strobe(color, speed):
+		black = IColor()
 		def render(x,y,img,t,duration):
-			v = math.sin(t*speed)
-			return color * v
+			b = (t*speed*5)%1
+			return color if b > .5 else black
 
 		return render
 
 	@staticmethod
 	def twinkle(color, speed):
+		noise = Noise()
 		def render(x,y,img,t,duration):
-			v = math.sin(t*speed)
-			return color * v
+			v = math.sin(t*speed + noise.int1d(y*img.h*img.w+x*img.w) * math.pi)*.5+.5
+			return color * v**2
 
 		return render
 
 	@staticmethod
 	def rainbow(speed):
 		def render(x,y,img,t,duration):
-			O = math.pi / 3.
-			return IColor(math.sin(x+t*speed), math.sin(x+t*speed+O), math.sin(x+t*speed+O*2))
+			return IColor.fromHSL(x*.25+t*speed, 1.0, 0.5)
 
 		return render
