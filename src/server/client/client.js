@@ -50,6 +50,13 @@ class Client {
 								vm.power = newPower;
 						}
 					);
+				},
+				actionHandler: function(action) {
+					Client.httpReq(
+						`/client/${Client.vm.cid}/state/action/${JSON.stringify(action)}`,
+						"POST",
+						result => {}
+					);
 				}
 			}
 		});

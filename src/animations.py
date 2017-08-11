@@ -11,6 +11,7 @@ class Animation:
 		self.img = Image(LED_W, LED_H)
 		self.duration = None
 		self.active = False
+		self.continuous = False
 		self.onComplete = None
 		self._animFunc = None
 
@@ -22,7 +23,7 @@ class Animation:
 		self.timer.startFrame()
 		
 		# see if animation is compelete
-		if (self.timer.time > self.duration):
+		if (not self.continuous and self.timer.time > self.duration):
 			self.active = False
 			self._animFunc = None
 			if self.onComplete is not None:
@@ -42,10 +43,16 @@ class Animation:
 		self.timer.reset()
 		self.duration = duration
 		self.active = True
+		self.continuous = False
 		def wrapped(x,y,img):
 			return func(x,y,img,self.timer.time,self.duration)
 		self._animFunc = wrapped
 		self.onComplete = callback
+
+	def startContinuous(self, func):
+		self.startAnimation(func)
+		self.duration = None
+		self.continuous = True
 
 	@staticmethod
 	def colorWipeReverse(colorFrom, colorTo, duration=1, sharpness=1):
@@ -67,5 +74,29 @@ class Animation:
 		def render(x,y,img,t,duration):
 			f = clip(t/duration, 0, 1)
 			return colorFrom * (1-f) + colorTo * f
+
+		return render
+
+	@staticmethod
+	def strobe(color, speed):
+		def render(x,y,img,t,duration):
+			v = math.sin(t*speed)
+			return color * v
+
+		return render
+
+	@staticmethod
+	def twinkle(color, speed):
+		def render(x,y,img,t,duration):
+			v = math.sin(t*speed)
+			return color * v
+
+		return render
+
+	@staticmethod
+	def rainbow(speed):
+		def render(x,y,img,t,duration):
+			O = math.pi / 3.
+			return IColor(math.sin(x+t*speed), math.sin(x+t*speed+O), math.sin(x+t*speed+O*2))
 
 		return render

@@ -49,6 +49,18 @@ class TestClient:
 			f = Animation.colorFade(previousColor, color)
 			self.animation.startAnimation(f, 0.1, None)
 
+	def actionCallback(self, data):
+		print(data)
+		if data["action"] == "anim-strobe":
+			f = Animation.strobe(self.getColor(), 5)
+			self.animation.startContinuous(f)
+		elif data["action"] == "anim-twinkle":
+			f = Animation.twinkle(self.getColor(), 2)
+			self.animation.startContinuous(f)
+		elif data["action"] == "anim-rainbow":
+			f = Animation.rainbow(3)
+			self.animation.startContinuous(f)
+
 	def update(self):
 		if self.animation.active:
 			self.animation.update()
@@ -77,5 +89,6 @@ subs = []
 # subs.append(Subscription(path="/test", callback=logCallback))
 subs.append(Subscription(path="/client/"+CID+"/state/power", callback=tc.powerCallback))
 subs.append(Subscription(path="/client/"+CID+"/state/color", callback=tc.colorCallback))
+subs.append(Subscription(path="/client/"+CID+"/state/action", callback=tc.actionCallback))
 print("Starting client...")
 startClient(subs, URL, CID, tc.update)
