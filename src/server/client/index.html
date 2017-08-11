@@ -32,8 +32,10 @@
 			</div>
 		</header>
 		<main class="mdl-layout__content">
+			<!-- Page: Basic control -->
 			<section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
 				<div class="page-content">
+					<!-- Power buttons -->
 					<div class="mdl-grid">
 						<div class="mdl-cell mdl-cell--12-col">
 							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -42,17 +44,22 @@
 							 </button>
 						</div>
 					</div>
+
+					<!-- Main color picker -->
 					<div class="mdl-grid">
 						<span class="mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col mdl-cell--middle" 
 						 v-for="(value, index) of color">
-							<table style="width: 100%;">
+							<table style="width: 100%; border-collapse: collapse;"
+							 v-bind:style="{backgroundColor: ['rgba(244,67,54,0.25)','rgba(76,175,80,0.25)','rgba(33,150,243,0.25)'][index]}">
 								<tr>
+									<!-- Label -->
 									<td style="width: 40px;">
-										<span v-bind:style="{backgroundColor: ['#F44336','#4CAF50','#2196F3'][index]}"
-										 class="color-chip" style="width: 40px; color:rgba(255,255,255,0.88)" >
-											{{"RGB"[index]}}
+										<span class="color-chip" style="width: 40px;" >
+											{{["Red", "Green", "Blue"][index]}}
 										</span>
 									</td>
+
+									<!-- Slider -->
 									<td style="width: auto;">
 										<input class="mdl-slider mdl-js-slider" v-bind:id="'rgb'.charAt(index)+'-slider'"
 								 		 v-model.number="color[index]" type="range" min="0" max="1" step="0.001"/>
@@ -61,15 +68,10 @@
 							</table>
 						</span>
 					</div>
-					<div class="mdl-grid">
-						<div class="pure-u-1">
-							<span v-bind:style="mixedColor" class="swatch" 
-							 style="display: inline-block; width: 100%; height: 6rem"></span>
-						</div>
-					</div>
 				</div>
 			</section>
 
+			<!-- Page: About -->
 			<section class="mdl-layout__tab-panel" id="scroll-tab-2">
 				<div class="page-content">
 					<div class="mdl-grid">
@@ -83,6 +85,7 @@
 		</main>
 	</div>
 
+	<!-- Snackbar support -->
 	<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
 		<div class="mdl-snackbar__text"></div>
 		<button type="button" class="mdl-snackbar__action"></button>

@@ -33,9 +33,9 @@ input[type=range] {
 
 .color-chip {
     display: inline-block;
-    padding: .5em .5em;
+    padding: 1em 1em;
     min-width: 2em;
-    text-align: center;
+    text-align: left;
 }
 
 .swatch {
