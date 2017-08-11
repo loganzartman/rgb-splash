@@ -2,34 +2,91 @@
 <html>
 <head>
 	<title>SCtrl</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="theme-color" content="rgb(233,30,99)">
 	<link rel="manifest" href="manifest.json"/>
 	
 	<script src="vue.js"></script>
 	<script src="client.js" defer></script>
-	<link rel="stylesheet" href="normalize.css" type="text/css"/>
-	<link rel="stylesheet" href="base-min.css" type="text/css"/>
-	<link rel="stylesheet" href="grids-min.css" type="text/css"/>
-	<link rel="stylesheet" href="grids-responsive-min.css" type="text/css"/>
-	<link rel="stylesheet" href="input-range.css" type="text/css"/>
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="page-styles.css" type="text/css"/>
+
+	<link rel="stylesheet" href="mdl/material.min.css" type="text/css"/>
+	<script src="mdl/material.js"></script>
 </head>
 <body>
 <div id="container">
-	<div class="pure-g">
-		<div class="pure-u-1 pure-u-md-1-2"><button v-on:click="setPower(true)">On</button></div>
-		<div class="pure-u-1 pure-u-md-1-2"><button v-on:click="setPower(false)">Off</button></div>
+	<!-- Simple header with scrollable tabs. -->
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<!-- Title -->
+				<span class="mdl-layout-title">Splash Controller: {{cid}}</span>
+			</div>
+			<!-- Tabs -->
+			<div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+				<a href="#scroll-tab-1" class="mdl-layout__tab is-active">Basic</a>
+				<a href="#scroll-tab-2" class="mdl-layout__tab">About</a>
+			</div>
+		</header>
+		<main class="mdl-layout__content">
+			<section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+				<div class="page-content">
+					<div class="mdl-grid">
+						<div class="mdl-cell mdl-cell--12-col">
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+							 v-on:click="togglePower">
+							 	<i class="material-icons">power_settings_new</i>&nbsp;{{power ? "Turn off" : "Turn on"}}
+							 </button>
+						</div>
+					</div>
+					<div class="mdl-grid">
+						<span class="mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col mdl-cell--middle" 
+						 v-for="(value, index) of color">
+							<table style="width: 100%;">
+								<tr>
+									<td style="width: 40px;">
+										<span v-bind:style="{backgroundColor: ['#F44336','#4CAF50','#2196F3'][index]}"
+										 class="color-chip" style="width: 40px; color:rgba(255,255,255,0.88)" >
+											{{"RGB"[index]}}
+										</span>
+									</td>
+									<td style="width: auto;">
+										<input class="mdl-slider mdl-js-slider" v-bind:id="'rgb'.charAt(index)+'-slider'"
+								 		 v-model.number="color[index]" type="range" min="0" max="1" step="0.001"/>
+									</td>
+								</tr>
+							</table>
+						</span>
+					</div>
+					<div class="mdl-grid">
+						<div class="pure-u-1">
+							<span v-bind:style="mixedColor" class="swatch" 
+							 style="display: inline-block; width: 100%; height: 6rem"></span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="mdl-layout__tab-panel" id="scroll-tab-2">
+				<div class="page-content">
+					<div class="mdl-grid">
+						<div class="mdl-cell mdl-cell--12-col">
+							<h4>Splash Controller Beta</h4>
+							<p>This is an experimental remote-control app with more features to come.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
 	</div>
-	<div class="pure-g" v-for="(value, index) of color">
-		<div class="pure-u-1-4">
-			<label class="swatch" v-bind:style="makeColor(index)" v-bind:for="'rgb'.charAt(index)+'-slider'">
-			{{"rgb".charAt(index)}}: {{(value*255).toFixed(0).padStart(3, "0")}}
-			</label>
-		</div>
-		<div class="pure-u-3-4">
-			<input v-bind:id="'rgb'.charAt(index)+'-slider'" v-model.number="color[index]" type="range" min="0" max="1" step="0.001"/>
-		</div>
+
+	<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+		<div class="mdl-snackbar__text"></div>
+		<button type="button" class="mdl-snackbar__action"></button>
 	</div>
-	<div class="pure-g"><div class="pure-u-1"><span v-bind:style="mixedColor" class="swatch" style="display: inline-block; width: 100%; height: 6rem"></span></div></div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@ import animations
 import sys
 
 URL = "http://localhost:8080"
-CID = "test"
+CID = "test-client"
 
 if len(sys.argv) == 2:
 	URL = sys.argv[1]

@@ -1,11 +1,13 @@
 class Client {
-	static init() {
+	static init(cid) {
 		Client.log("Test client loaded!");
 		Client.vueInit();
-		Client.httpReq("/client/test/fullstate", "GET", function(data){
+		Client.vm.cid = cid;
+		Client.httpReq(`/client/${Client.vm.cid}/fullstate`, "GET", function(data){
 			data = JSON.parse(data);
 			if (!data.ok) {
-				alert("Client is offline!");
+				let sb = document.querySelector(".mdl-js-snackbar");
+				sb.MaterialSnackbar.showSnackbar({message: `${cid} is offline.`});
 			}
 			else {
 				for (let prop in data) {
@@ -21,6 +23,7 @@ class Client {
 		let vm = new Vue({
 			el: "#container",
 			data: {
+				cid: null,
 				power: false,
 				color: [0,0,0]
 			},
@@ -36,30 +39,29 @@ class Client {
 			methods: {
 				makeColor: function(channelIdx) {
 					let color = [0,0,0];
-					color[channelIdx] = this.color[channelIdx];
+					color[channelIdx] = 0.7;
 					return {"backgroundColor": `rgb(\
 						${Math.floor(color[0]*255)},\
 						${Math.floor(color[1]*255)},\
 						${Math.floor(color[2]*255)}\
 					)`};
 				},
-				setPower: function(state) {
-					this.power = state;
+				togglePower: function() {
+					Client.httpReq(
+						`/client/${Client.vm.cid}/state/power/` + JSON.stringify(!vm.power),
+						"POST",
+						result => {
+							if (JSON.parse(result).ok)
+								vm.power = !vm.power;
+						}
+					);
 				}
 			}
 		});
 
-		function powerChange(){
-			Client.httpReq(
-				"/client/test/state/power/" + JSON.stringify(vm.power),
-				"POST",
-				result => console.log(result)
-			);
-		}
-
 		let colorChange = debounce((oldVal, newVal) => {
 			Client.httpReq(
-				"/client/test/state/color/" + JSON.stringify([
+				`/client/${Client.vm.cid}/state/color/` + JSON.stringify([
 					parseFloat(vm.color[0]),
 					parseFloat(vm.color[1]),
 					parseFloat(vm.color[2])
@@ -69,7 +71,6 @@ class Client {
 			);
 		}, 200);
 
-		vm.$watch("power", powerChange);
 		vm.$watch("color", colorChange, {deep: true});
 		Client.vm = vm;
 	}
@@ -91,7 +92,7 @@ class Client {
 		xhr.send();
 	}
 }
-Client.init();
+Client.init("test-client");
 
 function debounce(f, timeout) {
 	let timer = null, call = false;
