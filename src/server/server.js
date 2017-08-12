@@ -25,7 +25,12 @@ app.get("/test", (req,res) => {
 
 app.get("/client/:cid/connect", (req,res) => {
 	let cid = req.params.cid;
-	clientCallbacks[cid] = Object.assign({}, defaults);
+	
+	clientCallbacks[cid] = {}
+	Object.keys(defaults).forEach(k => clientCallbacks[cid][k] = null);
+
+	clientStates[cid] = Object.assign({}, defaults);
+
 	res.send(JSON.stringify({
 		"ok": true,
 		"cid": cid
