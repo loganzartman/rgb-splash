@@ -35,11 +35,18 @@ class Animation:
         showImage(self.strip, self.img)
         self.timer.endFrame()
 
+    def stop(self):
+        if self.onComplete is not None:
+                self.onComplete(False)
+        self.active = False
+        self.onComplete = None
+        self.duration = None
+        self._animFunc = None
+
     def startAnimation(self, func, duration=1, callback=None):
         """Begin an animation given a render function."""
         if self.active:
-            if self.onComplete is not None:
-                self.onComplete(False)
+            self.stop()
 
         self.timer.reset()
         self.duration = duration

@@ -56,7 +56,10 @@ class TestClient:
 		self.copyCallback(data)
 
 	def actionCallback(self, data):
-		if data["action"] == "anim-strobe":
+		if data["action"] == "anim-cancel":
+			self.animation.stop()
+			self.updateMatrixColor()
+		elif data["action"] == "anim-strobe":
 			f = Animation.strobe(self.getColor(), self.data["fxparams"]["speed"])
 			self.animation.startContinuous(f)
 		elif data["action"] == "anim-twinkle":

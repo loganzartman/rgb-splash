@@ -66,6 +66,11 @@
               <slider-plus label="Speed" min="0" max="5" step="0.2" v-model="fxparams.speed"></slider-plus>
             </div>
             <div class="mdl-cell mdl-cell--4-col">
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" style="width: 100%;" v-on:click="actionHandler('anim-cancel')">
+                <i class="material-icons">cancel</i>
+              </button>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%;" v-on:click="actionHandler('anim-strobe')">
                 <i class="material-icons">colorize</i> Strobe
               </button>
