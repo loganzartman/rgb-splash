@@ -52,15 +52,18 @@ class TestClient:
 			f = Animation.colorFade(previousColor, color)
 			self.animation.startAnimation(f, 0.1, self.animationComplete)
 
+	def fxparamsCallback(self, data):
+		self.copyCallback(data)
+
 	def actionCallback(self, data):
 		if data["action"] == "anim-strobe":
-			f = Animation.strobe(self.getColor(), 1)
+			f = Animation.strobe(self.getColor(), self.data["fxparams"]["speed"])
 			self.animation.startContinuous(f)
 		elif data["action"] == "anim-twinkle":
-			f = Animation.twinkle(self.getColor(), 1)
+			f = Animation.twinkle(self.getColor(), self.data["fxparams"]["speed"])
 			self.animation.startContinuous(f)
 		elif data["action"] == "anim-rainbow":
-			f = Animation.rainbow(1)
+			f = Animation.rainbow(self.data["fxparams"]["speed"])
 			self.animation.startContinuous(f)
 
 	def update(self):
@@ -92,6 +95,7 @@ subs = []
 # subs.append(Subscription(path="/test", callback=logCallback))
 subs.append(Subscription(path="/client/"+CID+"/state/power", callback=tc.powerCallback))
 subs.append(Subscription(path="/client/"+CID+"/state/color", callback=tc.colorCallback))
+subs.append(Subscription(path="/client/"+CID+"/state/fxparams", callback=tc.fxparamsCallback))
 subs.append(Subscription(path="/client/"+CID+"/state/action", callback=tc.actionCallback))
 print("Starting client...")
 startClient(subs, URL, CID, tc.update)

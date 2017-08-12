@@ -1,103 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SCtrl</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<meta name="theme-color" content="rgb(233,30,99)">
-	<link rel="manifest" href="manifest.json"/>
-	
-	<script src="vue.js"></script>
-	<script src="rgb-sliders.js"></script>
-	<script src="client.js" defer></script>
+  <title>SCtrl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="theme-color" content="rgb(233,30,99)">
+  <link rel="manifest" href="manifest.json"/>
 
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="page-styles.css" type="text/css"/>
+  <script src="vue.js"></script>
+  <script src="slider-plus.js"></script>
+  <script src="rgb-sliders.js"></script>
+  <script src="client.js" defer></script>
 
-	<link rel="stylesheet" href="mdl/material.min.css" type="text/css"/>
-	<script src="mdl/material.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="page-styles.css" type="text/css"/>
+
+  <link rel="stylesheet" href="mdl/material.min.css" type="text/css"/>
+  <script src="mdl/material.js"></script>
 </head>
 <body>
-<div id="container">
-	<!-- Simple header with scrollable tabs. -->
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<header class="mdl-layout__header">
-			<div class="mdl-layout__header-row">
-				<!-- Title -->
-				<span class="mdl-layout-title">Splash Controller: {{cid}}</span>
-			</div>
-			<!-- Tabs -->
-			<div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-				<a href="#scroll-basic" class="mdl-layout__tab is-active">Basic</a>
-				<a href="#scroll-effects" class="mdl-layout__tab">Effects</a>
-				<a href="#scroll-about" class="mdl-layout__tab">About</a>
-			</div>
-		</header>
-		<main class="mdl-layout__content">
-			<!-- Page: Basic control -->
-			<section class="mdl-layout__tab-panel is-active" id="scroll-basic">
-				<div class="page-content">
-					<!-- Power buttons -->
-					<div class="mdl-grid">
-						<div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col">
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-							 v-on:click="togglePower" style="width: 100%; height: 72px;">
-							 	<i class="material-icons">power_settings_new</i>&nbsp;{{power ? "Turn off" : "Turn on"}}
-							 </button>
-						</div>
-						
-						<!-- Main color picker -->
-					</div>
-					<rgb-sliders v-model="color"></rgb-sliders>
-				</div>
-			</section>
+  <div id="container">
+    <!-- Simple header with scrollable tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Splash Controller: {{cid}}</span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a href="#scroll-basic" class="mdl-layout__tab is-active">Basic</a>
+          <a href="#scroll-effects" class="mdl-layout__tab">Effects</a>
+          <a href="#scroll-about" class="mdl-layout__tab">About</a>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <!-- Page: Basic control -->
+        <section class="mdl-layout__tab-panel is-active" id="scroll-basic">
+          <div class="page-content">
+            <!-- Power buttons -->
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--12-col">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" v-on:click="togglePower" style="width: 100%; height: 72px;">
+                <i class="material-icons">power_settings_new</i>&nbsp;{{power ? "Turn off" : "Turn on"}}
+              </button>
+            </div>
 
-			<!-- Page: Effects -->
-			<section class="mdl-layout__tab-panel" id="scroll-effects">
-				<div class="page-content">
-					<div class="mdl-grid">
-						<div class="mdl-cell mdl-cell--12-col">
-							<h4>It's lit</h4>
-							<p>Effects with <i class="material-icons" style="font-size: inherit;">colorize</i> may use the colors you select on the <b>Basic</b> tab.</p>
-						</div>
-						<div class="mdl-cell mdl-cell--4-col">
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%; height: 72px;" v-on:click="actionHandler('anim-strobe')">
-							<i class="material-icons">colorize</i> Strobe
-							</button>
-						</div>
-						<div class="mdl-cell mdl-cell--4-col">
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%; height: 72px;" v-on:click="actionHandler('anim-twinkle')">
-							<i class="material-icons">colorize</i> Twinkle
-							</button>
-						</div>
-						<div class="mdl-cell mdl-cell--4-col">
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%; height: 72px;" v-on:click="actionHandler('anim-rainbow')">
-							Rainbow
-							</button>
-						</div>
-					</div>
-				</div>
-			</section>
+            <!-- Main color picker -->
+          </div>
+          <rgb-sliders v-model="color"></rgb-sliders>
+        </div>
+      </section>
 
-			<!-- Page: About -->
-			<section class="mdl-layout__tab-panel" id="scroll-about">
-				<div class="page-content">
-					<div class="mdl-grid">
-						<div class="mdl-cell mdl-cell--12-col">
-							<h4>Splash Controller Beta</h4>
-							<p>This is an experimental remote-control app with more features to come.</p>
-						</div>
-					</div>
-				</div>
-			</section>
-		</main>
-	</div>
 
-	<!-- Snackbar support -->
-	<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
-		<div class="mdl-snackbar__text"></div>
-		<button type="button" class="mdl-snackbar__action"></button>
-	</div>
+      <!-- Page: Effects -->
+      <section class="mdl-layout__tab-panel" id="scroll-effects">
+        <div class="page-content">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>It's lit</h4>
+              <p>Effects with <i class="material-icons" style="font-size: inherit;">colorize</i> may use the colors you
+              select on the <b>Basic</b> tab.</p>
+            </div>
+            <div class="mdl-cell mdl-cell--12-col">
+              <slider-plus label="Speed" min="0" max="5" step="0.2" v-model="fxparams.speed"></slider-plus>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%;" v-on:click="actionHandler('anim-strobe')">
+                <i class="material-icons">colorize</i> Strobe
+              </button>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%;" v-on:click="actionHandler('anim-twinkle')">
+                <i class="material-icons">colorize</i> Twinkle
+              </button>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width: 100%;" v-on:click="actionHandler('anim-rainbow')">
+                Rainbow
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page: About -->
+      <section class="mdl-layout__tab-panel" id="scroll-about">
+        <div class="page-content">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Splash Controller Beta</h4>
+              <p>This is an experimental remote-control app with more features to come.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Snackbar support -->
+  <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button type="button" class="mdl-snackbar__action"></button>
+  </div>
 </div>
 </body>
 </html>

@@ -1,5 +1,8 @@
 {
 	"power": true,
 	"mode": "solid",
-	"color": [1,1,1]
+	"color": [1,1,1],
+	"fxparams": {
+		"speed": 1
+	}
 }

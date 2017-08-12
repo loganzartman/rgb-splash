@@ -25,7 +25,10 @@ class Client {
 			data: {
 				cid: null,
 				power: false,
-				color: [0,0,0]
+				color: [0,0,0],
+				fxparams: {
+					speed: 0
+				}
 			},
 			methods: {
 				makeColor: function(channelIdx) {
@@ -73,7 +76,16 @@ class Client {
 			);
 		}, 200);
 
+		let fxparamsChange = debounce((oldVal, newVal) => {
+			Client.httpReq(
+				`/client/${Client.vm.cid}/state/fxparams/` + JSON.stringify(vm.fxparams),
+				"POST",
+				result => console.log(result)
+			);
+		}, 200);
+
 		vm.$watch("color", colorChange, {deep: true});
+		vm.$watch("fxparams", fxparamsChange, {deep: true});
 		Client.vm = vm;
 	}
 
