@@ -15,3 +15,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+**/mdl/* linguist-vendored=true
+**/vue.js linguist-vendored=true
+**/vue.min.js linguist-vendored=true
