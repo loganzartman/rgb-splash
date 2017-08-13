@@ -99,7 +99,9 @@ class Animation:
     def twinkle(color, speed):
         noise = Noise()
         def render(x,y,img,t,duration):
-            v = math.sin(t*speed + noise.int1d(y*img.h*img.w+x*img.w) * math.pi)*.5+.5
+            speedRand = noise.int1d(y*img.h*img.w+x*img.w+37) * 0.5 + 0.75
+            offsetRand = noise.int1d(y*img.h*img.w+x*img.w)
+            v = math.sin(t*speed*speedRand + offsetRand * math.pi)*.5+.5
             return color * v**2
 
         return render
@@ -107,6 +109,6 @@ class Animation:
     @staticmethod
     def rainbow(speed):
         def render(x,y,img,t,duration):
-            return IColor.fromHSL(x*.25+t*speed, 1.0, 0.5)
+            return IColor.fromHSL(x*.33+t*speed, 1.0, 0.5)
 
         return render
