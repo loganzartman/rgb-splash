@@ -33,6 +33,7 @@ Vue.component("color-picker", {
 	},
 	methods: {
 		hsl2rgb: function(h, s, l) {
+			h %= 1;
 			let r, g, b;
 			const hue2rgb = (p, q, t) => {
 				if (t < 0) t += 1;
@@ -58,11 +59,12 @@ Vue.component("color-picker", {
 
 		computeColor: function(angle, distance, brightness) {
 			distance = Math.max(0, Math.min(1, distance));
-			let rgb = this.hsl2rgb(angle, distance, brightness);
+			let rgb = this.hsl2rgb(angle, distance, 0.5);
 			return rgb;
 		},
 
 		makeWheel: function(size) {
+			const radius = size/2;
 			let display = document.createElement("canvas");
 			display.width = size;
 			display.height = size;
@@ -71,14 +73,16 @@ Vue.component("color-picker", {
 			let wheelBuffer = this.createWheelImage(size);
 
 			//adjustable params
-			let brightness = 0;
-			let distance = 1;
+			let brightness = 1;
+			let distance = 0.5;
 			let angle = 0;
 
 			//redraw function
 			const redraw = () => {
-				const br = Math.floor(brightness * 255);
-				const col = this.computeColor(angle, distance, brightness);
+				const br = Math.round(brightness * 255);
+				const col = this.computeColor(angle / (Math.PI*2) + 0.25, distance, brightness);
+				const selX = Math.cos(angle)*distance*radius + size/2;
+				const selY = Math.sin(angle)*distance*radius + size/2;
 
 				ctx.save();
 
@@ -96,6 +100,10 @@ Vue.component("color-picker", {
 				ctx.lineStyle = "white";
 				ctx.lineWidth = 2;
 				ctx.fillStyle = `rgb(${col[0]}, ${col[1]}, ${col[2]})`;
+				ctx.beginPath();
+				ctx.arc(selX, selY, 14, 0, Math.PI*2);
+				ctx.fill();
+				ctx.stroke();
 				ctx.restore();
 			};
 			redraw();
@@ -129,6 +137,7 @@ Vue.component("color-picker", {
 				}
 			});
 
+			this.attachListeners(display, size);
 			return display;
 		},
 
@@ -168,6 +177,23 @@ Vue.component("color-picker", {
 			}
 			ctx.putImageData(idata, 0, 0);
 			return canvas;
+		},
+
+		attachListeners: function(el, size) {
+			const updatePosition = (x,y) => {
+				let dx = x - size/2, dy = y - size/2;
+				let angle = Math.atan2(dy, dx);
+				let dist = Math.sqrt(dx*dx+dy*dy) / (size*0.5);
+				el.angle = angle;
+				el.distance = dist;
+			};
+
+			el.addEventListener("mousemove", function(event){
+				updatePosition(
+					event.offsetX,
+					event.offsetY
+				);
+			}, false);
 		}
 	},
 	watch: {
