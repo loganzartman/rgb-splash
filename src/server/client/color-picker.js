@@ -185,20 +185,48 @@ Vue.component("color-picker", {
 		},
 
 		attachListeners: function(el, size) {
-			const updatePosition = (x,y) => {
-				let dx = x - size/2, dy = y - size/2;
+			let down = false;
+
+			//get a position from either touch or mouse event
+			//relative to target element
+			const normalizePosition = (event) => {
+				let x, y;
+				if (event.targetTouches) {
+					x = event.targetTouches[0].clientX;
+					y = event.targetTouches[0].clientY;
+				}
+				else {
+					x = event.clientX;
+					y = event.clientY;
+				}
+
+				let target = event.target || event.srcElement;
+				let rect = target.getBoundingClientRect();
+				x -= rect.left;
+				y -= rect.top;
+				return {x, y};
+			};
+
+			//update the internal position data
+			const updatePosition = (event) => {
+				if (!down)
+					return;
+				
+				let pos = normalizePosition(event);
+				let dx = pos.x - size/2, dy = pos.y - size/2;
 				let angle = Math.atan2(dy, dx);
 				let dist = Math.sqrt(dx*dx+dy*dy) / (size*0.5);
 				el.angle = angle;
 				el.distance = dist;
 			};
 
-			el.addEventListener("mousemove", function(event){
-				updatePosition(
-					event.offsetX,
-					event.offsetY
-				);
-			}, false);
+			el.addEventListener("mousedown", function(event){event.preventDefault(); down = true;}, false);
+			el.addEventListener("mouseup", function(event){event.preventDefault(); down = false;}, false);
+			el.addEventListener("mousemove", function(event){updatePosition(event);}, false);
+
+			el.addEventListener("touchstart", function(event){event.preventDefault(); down = true;}, false);
+			el.addEventListener("touchend", function(event){event.preventDefault(); down = false;}, false);
+			el.addEventListener("touchmove", function(event){updatePosition(event);}, false);
 		}
 	},
 	watch: {
