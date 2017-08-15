@@ -9,28 +9,48 @@ Vue.component("color-picker", {
 		</span>
 
 		<span class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col mdl-shadow--3dp"
-		 v-bind:style="mixedColor" style="height: 108px; border-radius: 4px;"></span>
+		 v-bind:style="cssColor" style="border-radius: 4px;"></span>
 		</div>`,
 	props: ["value"],
 	data: function(){
 		return {
-			color: this.value,
-			brightness: 1
+			xcolor: this.value,
+			brightness: 1,
+			hue: 0,
+			saturation:  0.5
 		}
 	},
 	mounted: function() {
 		let container = this.$refs.wheelContainer;
-		let wheel = this.makeWheel(container.offsetWidth, col => this.color = [col[0]/255, col[1]/255, col[2]/255]);
+		let wheel = this.makeWheel(container.offsetWidth, col => {
+			this.xcolor = col;
+			this.$emit("input", col);
+		});
 		container.appendChild(wheel);
 
+		this.$watch("hue", val => wheel.angle = (val - 0.25)*Math.PI*2);
+		this.$watch("saturation", val => wheel.distance = val);
 		this.$watch("brightness", val => wheel.brightness = val);
+		this.$watch("value", v => this.color = v);
 	},
 	computed: {
-		mixedColor: function() {
+		color: {
+			get: function() {
+				return this.xcolor;
+			},
+			set: function(val) {
+				let hsv = this.rgb2hsv(val[0], val[1], val[2]);
+				this.hue = hsv[0];
+				this.saturation = hsv[1];
+				this.brightness = hsv[2];
+				this.$emit("input", val);
+			}
+		},
+		cssColor: function() {
 			return {"backgroundColor": `rgb(\
-				${Math.floor(this.value[0]*255)},\
-				${Math.floor(this.value[1]*255)},\
-				${Math.floor(this.value[2]*255)}\
+				${Math.floor(this.xcolor[0]*255)},\
+				${Math.floor(this.xcolor[1]*255)},\
+				${Math.floor(this.xcolor[2]*255)}\
 			)`};
 		}
 	},
@@ -57,7 +77,30 @@ Vue.component("color-picker", {
 		        case 4: r = t, g = p, b = v; break;
 		        case 5: r = v, g = p, b = q; break;
 		    }
-		    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+		    return [r, g, b];
+		},
+
+		rgb2hsv: function(r, g, b) {
+			let max = Math.max(r, g, b), min = Math.min(r, g, b);
+			let h, s, v = max;
+
+			let d = max - min;
+			s = max == 0 ? 0 : d / max;
+
+			if (max == min) {
+				h = 0; // achromatic
+			}
+			else {
+				switch (max) {
+					case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+					case g: h = (b - r) / d + 2; break;
+					case b: h = (r - g) / d + 4; break;
+				}
+
+				h /= 6;
+			}
+
+			return [h, s, v];
 		},
 
 		computeColor: function(angle, distance, brightness) {
@@ -77,17 +120,18 @@ Vue.component("color-picker", {
 
 			//adjustable params
 			let brightness = 1;
-			let distance = 0.5;
+			let distance = 0;
 			let angle = 0;
 
 			//redraw function
-			const redraw = () => {
+			const redraw = (update=true) => {
 				const col = this.computeColor(angle / (Math.PI*2) + 0.25, distance, brightness);
 				const br = Math.round(brightness * 255);
 				const selX = Math.cos(angle)*distance*radius + size/2;
 				const selY = Math.sin(angle)*distance*radius + size/2;
 
-				updateCallback(col);
+				if (update)
+					updateCallback(col);
 
 				ctx.save();
 
@@ -111,7 +155,7 @@ Vue.component("color-picker", {
 
 				//draw selected color circle
 				ctx.lineWidth = 2;
-				ctx.fillStyle = `rgb(${col[0]}, ${col[1]}, ${col[2]})`;
+				ctx.fillStyle = `rgb(${Math.round(col[0]*255)}, ${Math.round(col[1]*255)}, ${Math.round(col[2]*255)})`;
 				ctx.beginPath();
 				ctx.arc(selX, selY, 14, 0, Math.PI*2);
 				ctx.fill();
@@ -123,7 +167,7 @@ Vue.component("color-picker", {
 				ctx.stroke();
 				ctx.restore();
 			};
-			redraw();
+			redraw(false);
 
 			//attach adjustable params to canvas
 			Object.defineProperty(display, "brightness", {
@@ -189,9 +233,9 @@ Vue.component("color-picker", {
 
 					//write color
 					let rgb = this.hsv2rgb(h,s,1);
-					data[idx+0] = rgb[0];
-					data[idx+1] = rgb[1];
-					data[idx+2] = rgb[2];
+					data[idx+0] = Math.round(rgb[0] * 255);
+					data[idx+1] = Math.round(rgb[1] * 255);
+					data[idx+2] = Math.round(rgb[2] * 255);
 					data[idx+3] = Math.round(a * 255);
 				}
 			}
@@ -242,11 +286,6 @@ Vue.component("color-picker", {
 			el.addEventListener("touchstart", function(event){event.preventDefault(); down = true;}, false);
 			el.addEventListener("touchend", function(event){event.preventDefault(); down = false;}, false);
 			el.addEventListener("touchmove", function(event){updatePosition(event);}, false);
-		}
-	},
-	watch: {
-		color: function(newValue) {
-			this.$emit("input", newValue);
 		}
 	}
 });
