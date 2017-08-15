@@ -8,19 +8,19 @@ Vue.component("color-picker", {
 			</table>
 		</span>
 
-		<span class="mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col mdl-shadow--3dp"
-		 v-bind:style="mixedColor" style="height: inherit; min-height: 108px; border-radius: 4px;"></span>
+		<span class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col mdl-shadow--3dp"
+		 v-bind:style="mixedColor" style="height: 108px; border-radius: 4px;"></span>
 		</div>`,
 	props: ["value"],
 	data: function(){
 		return {
-			value: [0,0,0],
+			color: this.value,
 			brightness: 1
 		}
 	},
 	mounted: function() {
 		let container = this.$refs.wheelContainer;
-		let wheel = this.makeWheel(container.offsetWidth);
+		let wheel = this.makeWheel(container.offsetWidth, col => this.color = [col[0]/255, col[1]/255, col[2]/255]);
 		container.appendChild(wheel);
 
 		this.$watch("brightness", val => wheel.brightness = val);
@@ -66,7 +66,7 @@ Vue.component("color-picker", {
 			return rgb;
 		},
 
-		makeWheel: function(size) {
+		makeWheel: function(size, updateCallback) {
 			const radius = size/2;
 			let display = document.createElement("canvas");
 			display.width = size;
@@ -82,10 +82,12 @@ Vue.component("color-picker", {
 
 			//redraw function
 			const redraw = () => {
-				const br = Math.round(brightness * 255);
 				const col = this.computeColor(angle / (Math.PI*2) + 0.25, distance, brightness);
+				const br = Math.round(brightness * 255);
 				const selX = Math.cos(angle)*distance*radius + size/2;
 				const selY = Math.sin(angle)*distance*radius + size/2;
+
+				updateCallback(col);
 
 				ctx.save();
 
@@ -93,8 +95,14 @@ Vue.component("color-picker", {
 				ctx.clearRect(0, 0, size, size);
 				ctx.fillStyle = "black";
 				ctx.beginPath();
-				ctx.arc(size/2, size/2, size/2-1, 0, Math.PI*2);
+				ctx.arc(size/2, size/2, size/2-0.25, 0, Math.PI*2);
+				ctx.shadowOffsetY = 4;
+				ctx.shadowBlur = 6;
+				ctx.shadowColor = "rgba(0,0,0,0.25)";
 				ctx.fill();
+
+				ctx.restore();
+				ctx.save();
 
 				//draw color wheel
 				ctx.globalAlpha = brightness;
@@ -237,7 +245,7 @@ Vue.component("color-picker", {
 		}
 	},
 	watch: {
-		value: function(newValue) {
+		color: function(newValue) {
 			this.$emit("input", newValue);
 		}
 	}

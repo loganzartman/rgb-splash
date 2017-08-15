@@ -4,11 +4,11 @@ Vue.component("slider-plus", {
 		<tr>
 			<td>{{label}}</td>
 			<td style="width: 100%;">
-				<input type="range" class="mdl-slider mdl-js-slider" :min="min" :max="max" :step="step" v-model.number="value"/>
+				<input type="range" class="mdl-slider mdl-js-slider" :min="min" :max="max" :step="step" v-model.number="v"/>
 			</td>
 			<td>
 				<div class="mdl-textfield mdl-js-textfield" style="width: 80px;">
-					<input class="mdl-textfield__input" type="text" v-model.number="value" pattern="-?[0-9]*(\.[0-9]+)?">
+					<input class="mdl-textfield__input" type="text" v-model.number="v" pattern="-?[0-9]*(\.[0-9]+)?">
 				</div>
 			</td>
 		</tr>
@@ -17,15 +17,13 @@ Vue.component("slider-plus", {
 	props: ["value", "label", "min", "max", "step"],
 	data: function(){
 		return {
-			value: 0.0
+			v: this.value
 		}
-	},
-	computed: {
 	},
 	methods: {
 	},
 	watch: {
-		value: function(newValue) {
+		v: function(newValue) {
 			this.$emit("input", newValue);
 		}
 	}
