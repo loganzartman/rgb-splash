@@ -32,34 +32,34 @@ Vue.component("color-picker", {
 		}
 	},
 	methods: {
-		hsl2rgb: function(h, s, l) {
-			h %= 1;
-			let r, g, b;
-			const hue2rgb = (p, q, t) => {
-				if (t < 0) t += 1;
-				if (t > 1) t -= 1;
-				if (t < 1/6) return p + (q - p) * 6 * t;
-				if (t < 1/2) return q;
-				if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-				return p;
-			};
+		hsv2rgb: function(h, s, v) {
+		    h %= 1;
+		    if (h < 0)
+		    	h += 1;
 
-			if(s === 0) {
-				r = g = b = l; // achromatic
-			}
-			else {
-				let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-				let p = 2 * l - q;
-				r = hue2rgb(p, q, h + 1/3);
-				g = hue2rgb(p, q, h);
-				b = hue2rgb(p, q, h - 1/3);
-			}
-			return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+		    let r, g, b, i, f, p, q, t;
+		    if (arguments.length === 1) {
+		        s = h.s, v = h.v, h = h.h;
+		    }
+		    i = Math.floor(h * 6);
+		    f = h * 6 - i;
+		    p = v * (1 - s);
+		    q = v * (1 - f * s);
+		    t = v * (1 - (1 - f) * s);
+		    switch (i % 6) {
+		        case 0: r = v, g = t, b = p; break;
+		        case 1: r = q, g = v, b = p; break;
+		        case 2: r = p, g = v, b = t; break;
+		        case 3: r = p, g = q, b = v; break;
+		        case 4: r = t, g = p, b = v; break;
+		        case 5: r = v, g = p, b = q; break;
+		    }
+		    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 		},
 
 		computeColor: function(angle, distance, brightness) {
 			distance = Math.max(0, Math.min(1, distance));
-			let rgb = this.hsl2rgb(angle, distance, 0.5);
+			let rgb = this.hsv2rgb(angle, distance, brightness);
 			return rgb;
 		},
 
@@ -94,7 +94,9 @@ Vue.component("color-picker", {
 				ctx.fill();
 
 				//draw color wheel
+				ctx.globalAlpha = brightness;
 				ctx.drawImage(wheelBuffer, 0, 0);
+				ctx.globalAlpha = 1;
 
 				//draw selected color circle
 				ctx.lineStyle = "white";
@@ -159,20 +161,23 @@ Vue.component("color-picker", {
 					//compute hue
 					let angle = Math.atan2(y - cx, x - cy) - Math.PI*0.5;
 					let h = angle / (Math.PI*2) + 0.5;
-					let rgb = this.hsl2rgb(h,1,0.5);
 					
-					//compute alpha
+					//compute saturation
 					let dx = x - cx, dy = y - cy;
 					let dist = Math.sqrt(dx*dx+dy*dy);
-					let a = dist / (size/2);
+					let s = Math.min(1, dist / (size/2));
+
+					//compute alpha
+					let a = Math.max(1, dist / (size/2));
 					if (a > 1)
 						a = Math.max(0, a - (a-1)*(size/2)); //antialias
 
 					//write color
+					let rgb = this.hsv2rgb(h,s,1);
 					data[idx+0] = rgb[0];
 					data[idx+1] = rgb[1];
 					data[idx+2] = rgb[2];
-					data[idx+3] = Math.floor(a*255);
+					data[idx+3] = Math.round(a * 255);
 				}
 			}
 			ctx.putImageData(idata, 0, 0);
