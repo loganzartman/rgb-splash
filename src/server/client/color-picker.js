@@ -1,10 +1,10 @@
 Vue.component("color-picker", {
 	template: `
 		<div class="mdl-grid">
-		<span class="mdl-cell mdl-cell--9-col-desktop mdl-cell--12-col mdl-cell--middle">
+		<span class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col mdl-cell--middle">
 			<table style="width: 100%; border-spacing: 0; border-radius: 4px;">
 				<tr style="width: 100%;" ref="wheelContainer"></tr>
-				<tr></tr>
+				<tr><slider-plus v-model="brightness" label="Brightness" min="0" max="1" value="1" step="0.01"></slider-plus></tr>
 			</table>
 		</span>
 
@@ -14,13 +14,16 @@ Vue.component("color-picker", {
 	props: ["value"],
 	data: function(){
 		return {
-			value: [0,0,0]
+			value: [0,0,0],
+			brightness: 1
 		}
 	},
 	mounted: function() {
 		let container = this.$refs.wheelContainer;
 		let wheel = this.makeWheel(container.offsetWidth);
 		container.appendChild(wheel);
+
+		this.$watch("brightness", val => wheel.brightness = val);
 	},
 	computed: {
 		mixedColor: function() {
@@ -88,7 +91,7 @@ Vue.component("color-picker", {
 
 				//fill background with brightness
 				ctx.clearRect(0, 0, size, size);
-				ctx.fillStyle = `rgb(${br}, ${br}, ${br})`;
+				ctx.fillStyle = "black";
 				ctx.beginPath();
 				ctx.arc(size/2, size/2, size/2-1, 0, Math.PI*2);
 				ctx.fill();
@@ -99,12 +102,16 @@ Vue.component("color-picker", {
 				ctx.globalAlpha = 1;
 
 				//draw selected color circle
-				ctx.lineStyle = "white";
 				ctx.lineWidth = 2;
 				ctx.fillStyle = `rgb(${col[0]}, ${col[1]}, ${col[2]})`;
 				ctx.beginPath();
 				ctx.arc(selX, selY, 14, 0, Math.PI*2);
 				ctx.fill();
+				ctx.strokeStyle = "black";
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.arc(selX, selY, 13, 0, Math.PI*2);
+				ctx.strokeStyle = "white";
 				ctx.stroke();
 				ctx.restore();
 			};
